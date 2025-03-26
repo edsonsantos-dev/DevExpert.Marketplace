@@ -15,13 +15,13 @@ namespace DevExpert.Marketplace.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
-                    AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AddedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    AddedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AddedBy = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -32,14 +32,14 @@ namespace DevExpert.Marketplace.Data.Migrations
                 name: "Sellers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     FullName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
                     PhoneNumber = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: true),
-                    AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AddedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    AddedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AddedBy = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,17 +50,17 @@ namespace DevExpert.Marketplace.Data.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SellerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AddedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Stock = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SellerId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    AddedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AddedBy = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,14 +81,14 @@ namespace DevExpert.Marketplace.Data.Migrations
                 name: "Images",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DisplayPosition = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    DisplayPosition = table.Column<int>(type: "INTEGER", nullable: false),
                     Path = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AddedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AddedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    AddedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    AddedBy = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

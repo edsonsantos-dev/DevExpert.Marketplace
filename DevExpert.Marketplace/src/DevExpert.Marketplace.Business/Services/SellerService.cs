@@ -4,7 +4,7 @@ using DevExpert.Marketplace.Business.Models;
 
 namespace DevExpert.Marketplace.Business.Services;
 
-public class SellerService(IRepository<Seller> repository, INotifier notifier)
+public class SellerService(ISellerRepository repository, INotifier notifier)
     : Service<Seller>(repository, notifier)
 {
     public override Task DeleteAsync(Guid id)

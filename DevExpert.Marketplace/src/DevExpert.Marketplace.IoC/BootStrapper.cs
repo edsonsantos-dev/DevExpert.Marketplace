@@ -26,8 +26,8 @@ public static class BootStrapper
 
         service.AddScoped<ICategoryRepository, CategoryRepository>();
         service.AddScoped<IProductRepository, ProductRepository>();
-        service.AddScoped<IRepository<Image>, Repository<Image>>();
-        service.AddScoped<IRepository<Seller>, Repository<Seller>>();
+        service.AddScoped<IImageRepository, ImageRepository>();
+        service.AddScoped<ISellerRepository, SellerRepository>();
 
         service.AddScoped<IService<Category>, CategoryService>();
         service.AddScoped<IProductService, ProductService>();
