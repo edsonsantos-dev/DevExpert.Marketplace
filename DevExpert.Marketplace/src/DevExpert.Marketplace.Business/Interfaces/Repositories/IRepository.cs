@@ -8,6 +8,6 @@ public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     Task<TEntity?> GetByIdAsync(Guid id);
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task<TEntity> UpdateAsync(TEntity entity);
-    Task DeleteAsync(TEntity id);
+    Task DeleteAsync(TEntity entity);
     Task SaveChangesAsync();
 }

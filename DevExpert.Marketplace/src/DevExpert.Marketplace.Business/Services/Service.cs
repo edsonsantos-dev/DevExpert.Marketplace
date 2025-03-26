@@ -5,7 +5,7 @@ using DevExpert.Marketplace.Business.Models;
 
 namespace DevExpert.Marketplace.Business.Services;
 
-public class Service<TEntity>(
+public abstract class Service<TEntity>(
     IRepository<TEntity> repository,
     INotifier notifier) : IService<TEntity> where TEntity : Entity
 {
