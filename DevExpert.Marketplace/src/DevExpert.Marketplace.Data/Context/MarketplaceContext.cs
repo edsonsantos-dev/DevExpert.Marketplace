@@ -1,6 +1,7 @@
 using DevExpert.Marketplace.Business.Interfaces;
 using DevExpert.Marketplace.Business.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DevExpert.Marketplace.Data.Context;
 
@@ -49,49 +50,60 @@ public sealed class MarketplaceContext : DbContext
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = new CancellationToken())
     {
-        HandleAddedFieldsForEntities();
-        HandleModifiedFieldsForEntities();
+        HandleAddedOnAndAddedByForEntities();
+        HandleModifiedOnAndModifiedByForEntities();
 
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
-
-    private void HandleAddedFieldsForEntities()
+    
+    private void HandleModifiedOnAndModifiedByForEntities()
     {
-        HandleAuditFieldsForEntities(
-            EntityState.Modified,
-            new Dictionary<string, object>
-            {
-                { "AddedOn", DateTime.UtcNow },
-                { "AddedBy", UserId }
-            });
-    }
-
-    private void HandleModifiedFieldsForEntities()
-    {
-        HandleAuditFieldsForEntities(
-            EntityState.Modified,
-            new Dictionary<string, object>
-            {
-                { "ModifiedOn", DateTime.UtcNow },
-                { "ModifiedBy", UserId }
-            });
-    }
-
-    private void HandleAuditFieldsForEntities(
-        EntityState applicableState,
-        Dictionary<string, object> properties)
-    {
-        var entityEntries = ChangeTracker.Entries()
-            .Where(x =>
-                properties.Keys.Any(prop =>
-                    x.Entity.GetType().GetProperty(prop) != null));
+        var entityEntries = ChangeTracker
+            .Entries()
+            .Where(x => x.Entity.GetType().GetProperty("ModifiedOn") != null ||
+                        x.Entity.GetType().GetProperty("ModifiedBy") != null);
 
         foreach (var entityEntry in entityEntries)
         {
-            if (entityEntry.State != applicableState) continue;
+            if (entityEntry.State != EntityState.Modified) continue;
 
-            foreach (var property in properties)
-                entityEntry.Property(property.Key).CurrentValue = property.Value;
+            entityEntry.Property("ModifiedOn").CurrentValue = DateTime.Now;
+            entityEntry.Property("ModifiedBy").CurrentValue = UserId;
         }
+    }
+
+    private void HandleAddedOnAndAddedByForEntities()
+    {
+        var entityEntries = ChangeTracker.Entries()
+            .Where(x => x.Entity.GetType().GetProperty("AddedOn") != null ||
+                        x.Entity.GetType().GetProperty("AddedBy") != null);
+
+        foreach (var entityEntry in entityEntries)
+        {
+            var isAddedState = entityEntry.State == EntityState.Added;
+            var isModifiedState = entityEntry.State == EntityState.Modified;
+
+            SetPropertyIfNotNull(entityEntry, "AddedOn", DateTime.Now, isAddedState, isModifiedState);
+            SetPropertyIfNotNull(entityEntry, "AddedBy", UserId, isAddedState, isModifiedState);
+        }
+    }
+    
+    private static void SetPropertyIfNotNull(
+        EntityEntry entityEntry, 
+        string propertyName, 
+        object newValue, 
+        bool changeValueIfAddedState, 
+        bool changeIsModifiedIfModifiedState, 
+        Guid? condition = null)
+    {
+        var property = entityEntry.Metadata.FindProperty(propertyName);
+
+        if (property == null) return;
+        
+        if (changeValueIfAddedState && (condition == null || (Guid)entityEntry.Property(propertyName).CurrentValue! == condition.Value))
+            entityEntry.Property(propertyName).CurrentValue = newValue;
+
+        if (changeIsModifiedIfModifiedState)
+            entityEntry.Property(propertyName).IsModified = false;
     }
 }

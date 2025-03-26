@@ -8,21 +8,21 @@ public class SellerOutputViewModel : OutputViewModelBase<Seller, SellerOutputVie
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
 
-    public override SellerOutputViewModel FromModel(Seller? entity)
+    public override SellerOutputViewModel FromModel(Seller? model)
     {
-        if (entity == null)
+        if (model == null)
             return null;
 
         return new SellerOutputViewModel
         {
-            Id = entity.Id,
-            FullName = entity.FullName,
-            Email = entity.Email,
-            PhoneNumber = entity.PhoneNumber,
-            AddedOn = entity.AddedOn,
-            AddedBy = entity.AddedBy,
-            ModifiedOn = entity.ModifiedOn,
-            ModifiedBy = entity.ModifiedBy,
+            Id = model.Id,
+            FullName = model.FullName,
+            Email = model.Email,
+            PhoneNumber = model.PhoneNumber,
+            AddedBy = model.AddedBy,
+            AddedOn = model.AddedOn,
+            ModifiedBy = model.ModifiedBy,
+            ModifiedOn = model.ModifiedOn,
         };
     }
 }

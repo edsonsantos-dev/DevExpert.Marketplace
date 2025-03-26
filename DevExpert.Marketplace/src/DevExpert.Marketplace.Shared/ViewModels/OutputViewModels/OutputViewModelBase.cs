@@ -12,5 +12,5 @@ public abstract class OutputViewModelBase<TEntity, TOutputViewModel> : ViewModel
     public DateTime? ModifiedOn { get; protected set; }
     public Guid? ModifiedBy { get; protected set; }
 
-    public abstract TOutputViewModel FromModel(TEntity entity);
+    public abstract TOutputViewModel FromModel(TEntity model);
 }

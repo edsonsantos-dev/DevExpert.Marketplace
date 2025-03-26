@@ -13,27 +13,27 @@ public class ProductOutputViewModel : OutputViewModelBase<Product, ProductOutput
     public CategoryOutputViewModel? Category { get; private set; }
     public SellerOutputViewModel? Seller { get; private set; }
 
-    public override ProductOutputViewModel FromModel(Product? entity)
+    public override ProductOutputViewModel FromModel(Product? model)
     {
-        if (entity == null)
+        if (model == null)
             return null;
 
         return new ProductOutputViewModel
         {
-            Id = entity.Id,
-            Name = entity.Name,
-            Description = entity.Description,
-            Price = entity.Price,
-            Stock = entity.Stock,
-            Images = entity.Images
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Price = model.Price,
+            Stock = model.Stock,
+            Images = model.Images
                 .Select(new ImageOutputViewModel().FromModel)
                 .ToList(),
-            Category = new CategoryOutputViewModel().FromModel(entity.Category),
-            Seller = new SellerOutputViewModel().FromModel(entity.Seller),
-            AddedOn = entity.AddedOn,
-            AddedBy = entity.AddedBy,
-            ModifiedOn = entity.ModifiedOn,
-            ModifiedBy = entity.ModifiedBy
+            Category = new CategoryOutputViewModel().FromModel(model.Category),
+            Seller = new SellerOutputViewModel().FromModel(model.Seller),
+            AddedBy = model.AddedBy,
+            AddedOn = model.AddedOn,
+            ModifiedBy = model.ModifiedBy,
+            ModifiedOn = model.ModifiedOn,
         };
     }
 }

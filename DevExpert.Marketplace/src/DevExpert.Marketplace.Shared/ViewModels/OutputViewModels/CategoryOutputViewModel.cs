@@ -9,19 +9,21 @@ public class CategoryOutputViewModel : OutputViewModelBase<Category, CategoryOut
 
     public List<ProductOutputViewModel>? Products { get; private set; }
 
-    public override CategoryOutputViewModel FromModel(Category? entity)
+    public override CategoryOutputViewModel FromModel(Category? model)
     {
-        if (entity == null)
+        if (model == null)
             return null;
 
         return new CategoryOutputViewModel
         {
-            Id = entity.Id,
-            Name = entity.Name,
-            Description = entity.Description,
-            Products = entity.Products
-                .Select(new ProductOutputViewModel().FromModel)
-                .ToList(),
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Products = model.Products?.Select(new ProductOutputViewModel().FromModel).ToList(),
+            AddedBy = model.AddedBy,
+            AddedOn = model.AddedOn,
+            ModifiedBy = model.ModifiedBy,
+            ModifiedOn = model.ModifiedOn,
         };
     }
 }

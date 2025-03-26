@@ -8,19 +8,21 @@ public class ImageOutputViewModel : OutputViewModelBase<Image, ImageOutputViewMo
     public bool IsCover { get; private set; }
     public string? Path { get; private set; }
 
-    public override ImageOutputViewModel FromModel(Image? entity)
+    public override ImageOutputViewModel FromModel(Image? model)
     {
-        if (entity == null)
+        if (model == null)
             return null;
 
         return new ImageOutputViewModel
         {
-            Id = entity.Id,
-            DisplayPosition = entity.DisplayPosition,
-            IsCover = entity.IsCover,
-            Path = entity.Path,
-            AddedOn = entity.AddedOn,
-            AddedBy = entity.AddedBy
+            Id = model.Id,
+            DisplayPosition = model.DisplayPosition,
+            IsCover = model.IsCover,
+            Path = model.Path,
+            AddedBy = model.AddedBy,
+            AddedOn = model.AddedOn,
+            ModifiedBy = model.ModifiedBy,
+            ModifiedOn = model.ModifiedOn,
         };
     }
 }
