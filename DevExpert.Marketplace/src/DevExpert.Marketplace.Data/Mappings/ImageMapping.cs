@@ -10,6 +10,11 @@ public class ImageMapping : IEntityTypeConfiguration<Image>
     {
         builder.ToTable("Images");
         builder.HasKey(x => x.Id);
+        
+        builder.Property(x => x.Path)
+            .IsRequired()
+            .HasMaxLength(200)
+            .HasColumnType("varchar(200)");
 
         builder.Ignore(x => x.IsCover);
         

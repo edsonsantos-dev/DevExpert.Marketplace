@@ -13,11 +13,13 @@ public class ProductMapping : IEntityTypeConfiguration<Product>
 
         builder.Property(x => x.Name)
             .IsRequired()
-            .HasMaxLength(20);
+            .HasMaxLength(20)
+            .HasColumnType("varchar(20)");
 
         builder.Property(x => x.Description)
             .IsRequired()
-            .HasMaxLength(200);
+            .HasMaxLength(200)
+            .HasColumnType("varchar(200)");
 
         builder.Property(X => X.Price)
             .IsRequired()

@@ -12,7 +12,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DevExpert.Marketplace.Data\DevExpert.Marketplace.Data.csproj" />
-      <ProjectReference Include="..\DevExpert.Marketplace.Shared\DevExpert.Marketplace.Shared.csproj" />
     </ItemGroup>
-
+    
 </Project>

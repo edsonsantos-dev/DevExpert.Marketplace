@@ -1,3 +1,4 @@
+using DevExpert.Marketplace.Business.Interfaces;
 using DevExpert.Marketplace.Business.Interfaces.Notifications;
 using DevExpert.Marketplace.Business.Interfaces.Repositories;
 using DevExpert.Marketplace.Business.Interfaces.Services;
@@ -6,6 +7,7 @@ using DevExpert.Marketplace.Business.Notifications;
 using DevExpert.Marketplace.Business.Services;
 using DevExpert.Marketplace.Data.Context;
 using DevExpert.Marketplace.Data.Repositories;
+using DevExpert.Marketplace.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ public static class BootStrapper
     {
         var service = builder.Services;
 
+        service.AddScoped<IUserContext, UserContext>();
         service.AddScoped<DbContext, MarketplaceContext>();
         service.AddScoped<INotifier, Notifier>();
 

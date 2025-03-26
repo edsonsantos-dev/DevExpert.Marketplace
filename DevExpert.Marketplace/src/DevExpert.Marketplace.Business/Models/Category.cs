@@ -7,11 +7,7 @@ public class Category : Entity
     public string? Name { get; set; }
     public string? Description { get; set; }
 
-    public List<Product> Products { get; set; } = [];
-
-    public Category()
-    {
-    }
+    public List<Product>? Products { get; set; }
 
     public override void Validation(INotifier notifier)
     {
@@ -24,7 +20,7 @@ public class Category : Entity
     
     public bool CanBeDeleted(INotifier notifier)
     {
-        if (Products.Count == 0)
+        if (Products?.Count == 0)
             return true;
 
         notifier.AddNotification(new($"Category can not be deleted because it has products."));

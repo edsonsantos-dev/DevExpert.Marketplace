@@ -13,14 +13,17 @@ public class SellerMapping : IEntityTypeConfiguration<Seller>
 
         builder.Property(x => x.FullName)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(100)
+            .HasColumnType("varchar(100)");
 
         builder.Property(x => x.Email)
             .IsRequired()
-            .HasMaxLength(200);
+            .HasMaxLength(200)
+            .HasColumnType("varchar(200)");
 
         builder.Property(x => x.PhoneNumber)
-            .HasMaxLength(200);
+            .HasMaxLength(14)
+            .HasColumnType("varchar(14)");
         
         builder.HasIndex(x => x.AddedBy);
         builder.HasIndex(x => x.AddedOn);
