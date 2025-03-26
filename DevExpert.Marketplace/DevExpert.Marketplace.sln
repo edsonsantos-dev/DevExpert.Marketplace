@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpert.Marketplace.Business", "src\DevExpert.Marketplace.Business\DevExpert.Marketplace.Business.csproj", "{97E9E34B-7C90-48FB-BD0F-1CCA3A43BE69}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97E9E34B-7C90-48FB-BD0F-1CCA3A43BE69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E9E34B-7C90-48FB-BD0F-1CCA3A43BE69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E9E34B-7C90-48FB-BD0F-1CCA3A43BE69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E9E34B-7C90-48FB-BD0F-1CCA3A43BE69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
