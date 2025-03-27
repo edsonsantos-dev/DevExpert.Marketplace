@@ -8,12 +8,6 @@ builder.RegisterDatabaseServices();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
-    // .AddJsonOptions(opts =>
-    // {
-    //     opts.JsonSerializerOptions.IncludeFields = true;
-    //     opts.JsonSerializerOptions.WriteIndented = true;
-    //     opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    // });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.RegisterIoC();
