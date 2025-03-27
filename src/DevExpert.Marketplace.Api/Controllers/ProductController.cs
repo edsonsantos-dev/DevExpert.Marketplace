@@ -13,22 +13,24 @@ public class ProductController(INotifier notifier, IProductService service)
     : GenericController<ProductInputViewModel, Product, ProductOutputViewModel>(notifier, service)
 {
     [HttpGet("[action]")]
-    public async Task<IActionResult> GetProductByCategoryIdAsync(Guid categoryId)
+    public async Task<IActionResult> GetProductsByCategoryIdAsync(Guid categoryId)
     {
-        var product = await service.GetProductByCategoryIdAsync(categoryId);
+        var products = await service.GetProductsByCategoryIdAsync(categoryId);
 
-        return product == null
+        return !products.Any()
             ? CustomResponse(HttpStatusCode.NoContent)
-            : CustomResponse(HttpStatusCode.OK, new ProductOutputViewModel().FromModel(product));
+            : CustomResponse(HttpStatusCode.OK,
+                products.Select(x => new ProductOutputViewModel().FromModel(x)));
     }
-    
-    [HttpGet("[action]")]
-    public async Task<IActionResult> GetProductBySellerIdAsync(Guid sellerId)
-    {
-        var product = await service.GetProductBySellerIdAsync(sellerId);
 
-        return product == null
+    [HttpGet("[action]")]
+    public async Task<IActionResult> GetProductsBySellerIdAsync(Guid sellerId)
+    {
+        var products = await service.GetProductsBySellerIdAsync(sellerId);
+
+        return !products.Any()
             ? CustomResponse(HttpStatusCode.NoContent)
-            : CustomResponse(HttpStatusCode.OK, new ProductOutputViewModel().FromModel(product));
+            : CustomResponse(HttpStatusCode.OK,
+                products.Select(x => new ProductOutputViewModel().FromModel(x)));
     }
 }

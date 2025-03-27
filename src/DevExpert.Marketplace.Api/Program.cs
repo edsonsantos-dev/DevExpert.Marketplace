@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using DevExpert.Marketplace.IoC;
 using DevExpert.Marketplace.Shared.Extensions;
 
@@ -6,8 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.RegisterDatabaseServices();
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddControllers()
-    .AddJsonOptions(opts => { opts.JsonSerializerOptions.IncludeFields = true; });
+builder.Services.AddControllers();
+    // .AddJsonOptions(opts =>
+    // {
+    //     opts.JsonSerializerOptions.IncludeFields = true;
+    //     opts.JsonSerializerOptions.WriteIndented = true;
+    //     opts.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    // });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.RegisterIoC();

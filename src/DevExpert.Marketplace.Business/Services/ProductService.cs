@@ -11,10 +11,10 @@ public class ProductService(IProductRepository repository, INotifier notifier)
     public async override Task<Product> AddAsync(Product entity)
     {
         entity.Validation(notifier);
-        
+
         if (notifier.HaveNotification())
             return entity;
-        
+
         if (entity.Images.Any(image => !image.SaveImage(notifier, entity.Id)))
             return entity;
 
@@ -24,13 +24,13 @@ public class ProductService(IProductRepository repository, INotifier notifier)
         return entity;
     }
 
-    public async Task<Product?> GetProductByCategoryIdAsync(Guid categoryId)
+    public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
     {
-        return await repository.GetProductByCategoryIdAsync(categoryId);
+        return await repository.GetProductsByCategoryIdAsync(categoryId);
     }
 
-    public async Task<Product?> GetProductBySellerIdAsync(Guid sellerId)
+    public async Task<List<Product>> GetProductsBySellerIdAsync(Guid sellerId)
     {
-        return await repository.GetProductBySellerIdAsync(sellerId);
+        return await repository.GetProductsBySellerIdAsync(sellerId);
     }
 }

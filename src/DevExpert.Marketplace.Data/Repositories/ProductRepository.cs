@@ -8,22 +8,25 @@ namespace DevExpert.Marketplace.Data.Repositories;
 public class ProductRepository(MarketplaceContext context)
     : Repository<Product>(context), IProductRepository
 {
-    public async Task<Product?> GetProductByCategoryIdAsync(Guid categoryId)
-    {
-        return await DbSet
-            .AsNoTracking()
-            .Include(x => x.Category)
-            .Include(x => x.Images)
-            .FirstOrDefaultAsync(x => x.CategoryId == categoryId);
-    }
-
-    public async Task<Product?> GetProductBySellerIdAsync(Guid sellerId)
+    public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
     {
         return await DbSet
             .AsNoTracking()
             .Include(x => x.Category)
             .Include(x => x.Seller)
             .Include(x => x.Images)
-            .FirstOrDefaultAsync(x => x.SellerId == sellerId);
+            .Where(x => x.CategoryId == categoryId)
+            .ToListAsync();
+    }
+
+    public async Task<List<Product>> GetProductsBySellerIdAsync(Guid sellerId)
+    {
+        return await DbSet
+            .AsNoTracking()
+            .Include(x => x.Category)
+            .Include(x => x.Seller)
+            .Include(x => x.Images)
+            .Where(x => x.SellerId == sellerId)
+            .ToListAsync();
     }
 }

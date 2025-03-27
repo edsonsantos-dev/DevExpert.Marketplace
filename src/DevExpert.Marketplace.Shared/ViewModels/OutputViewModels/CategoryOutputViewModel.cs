@@ -7,8 +7,6 @@ public class CategoryOutputViewModel : OutputViewModelBase<Category, CategoryOut
     public string? Name { get; private set; }
     public string? Description { get; private set; }
 
-    public List<ProductOutputViewModel>? Products { get; private set; }
-
     public override CategoryOutputViewModel FromModel(Category? model)
     {
         if (model == null)
@@ -19,7 +17,6 @@ public class CategoryOutputViewModel : OutputViewModelBase<Category, CategoryOut
             Id = model.Id,
             Name = model.Name,
             Description = model.Description,
-            Products = model.Products?.Select(new ProductOutputViewModel().FromModel).ToList(),
             AddedBy = model.AddedBy,
             AddedOn = model.AddedOn,
             ModifiedBy = model.ModifiedBy,

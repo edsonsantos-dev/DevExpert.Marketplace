@@ -4,6 +4,6 @@ namespace DevExpert.Marketplace.Business.Interfaces.Services;
 
 public interface IProductService : IService<Product>
 {
-    Task<Product?> GetProductByCategoryIdAsync(Guid categoryId);
-    Task<Product?> GetProductBySellerIdAsync(Guid sellerId);
+    Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId);
+    Task<List<Product>> GetProductsBySellerIdAsync(Guid sellerId);
 }
