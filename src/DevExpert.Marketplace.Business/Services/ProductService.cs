@@ -10,10 +10,18 @@ public class ProductService(IProductRepository repository, INotifier notifier)
 {
     public async override Task<Product> AddAsync(Product entity)
     {
+        entity.Validation(notifier);
+        
+        if (notifier.HaveNotification())
+            return entity;
+        
         if (entity.Images.Any(image => !image.SaveImage(notifier, entity.Id)))
             return entity;
 
-        return await base.AddAsync(entity);
+        entity = await repository.AddAsync(entity);
+        await repository.SaveChangesAsync();
+
+        return entity;
     }
 
     public async Task<Product?> GetProductByCategoryIdAsync(Guid categoryId)
