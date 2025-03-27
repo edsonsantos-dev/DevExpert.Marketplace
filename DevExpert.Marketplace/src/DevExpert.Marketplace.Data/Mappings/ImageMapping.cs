@@ -11,12 +11,13 @@ public class ImageMapping : IEntityTypeConfiguration<Image>
         builder.ToTable("Images");
         builder.HasKey(x => x.Id);
         
-        builder.Property(x => x.Path)
+        builder.Property(x => x.FilePath)
             .IsRequired()
             .HasMaxLength(200)
             .HasColumnType("varchar(200)");
 
         builder.Ignore(x => x.IsCover);
+        builder.Ignore(x => x.FileBase64);
         
         builder.HasIndex(x => x.ProductId);
         builder.HasIndex(x => x.AddedBy);

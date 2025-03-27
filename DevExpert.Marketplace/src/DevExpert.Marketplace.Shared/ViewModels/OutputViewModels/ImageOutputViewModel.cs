@@ -6,7 +6,7 @@ public class ImageOutputViewModel : OutputViewModelBase<Image, ImageOutputViewMo
 {
     public int DisplayPosition { get; private set; }
     public bool IsCover { get; private set; }
-    public string? Path { get; private set; }
+    public string? FilePath { get; set; }
 
     public override ImageOutputViewModel FromModel(Image? model)
     {
@@ -18,7 +18,7 @@ public class ImageOutputViewModel : OutputViewModelBase<Image, ImageOutputViewMo
             Id = model.Id,
             DisplayPosition = model.DisplayPosition,
             IsCover = model.IsCover,
-            Path = model.Path,
+            FilePath = model.FilePath,
             AddedBy = model.AddedBy,
             AddedOn = model.AddedOn,
             ModifiedBy = model.ModifiedBy,

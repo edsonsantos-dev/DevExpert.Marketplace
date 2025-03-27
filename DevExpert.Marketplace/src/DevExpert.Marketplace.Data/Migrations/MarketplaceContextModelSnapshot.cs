@@ -69,16 +69,19 @@ namespace DevExpert.Marketplace.Data.Migrations
                     b.Property<int>("DisplayPosition")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");

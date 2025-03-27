@@ -83,7 +83,8 @@ namespace DevExpert.Marketplace.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     DisplayPosition = table.Column<int>(type: "INTEGER", nullable: false),
-                    Path = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
+                    FilePath = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
+                    Name = table.Column<string>(type: "varchar(100)", nullable: true),
                     ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
                     AddedOn = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AddedBy = table.Column<Guid>(type: "TEXT", nullable: false),

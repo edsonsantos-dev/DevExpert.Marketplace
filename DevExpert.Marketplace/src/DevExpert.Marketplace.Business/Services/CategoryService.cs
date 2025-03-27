@@ -19,6 +19,9 @@ public class CategoryService(
         }
 
         if (category.CanBeDeleted(notifier))
+        {
             await repository.DeleteAsync(category);
+            await repository.SaveChangesAsync();
+        }
     }
 }

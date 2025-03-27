@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevExpert.Marketplace.Data.Migrations
 {
     [DbContext(typeof(MarketplaceContext))]
-    [Migration("20250326185857_Initial")]
+    [Migration("20250326230850_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -72,16 +72,19 @@ namespace DevExpert.Marketplace.Data.Migrations
                     b.Property<int>("DisplayPosition")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(100)");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");
