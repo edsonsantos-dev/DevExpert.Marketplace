@@ -1,69 +1,42 @@
 using DevExpert.Marketplace.Business.Interfaces.Notifications;
+using Microsoft.AspNetCore.Http;
 
 namespace DevExpert.Marketplace.Business.Models;
 
 public class Image : Entity
 {
+    public string DirectoryPath => $"../DevExpert.Marketplace.App/wwwroot/images/products/{ProductId.ToString()}";
+
     public int DisplayPosition { get; set; }
-    public string? FilePath { get; set; }
     public string? Name { get; private set; }
     public bool IsCover => DisplayPosition == 1;
-    public string FileBase64 { get; set; }
 
     public Guid ProductId { get; set; }
     public Product Product { get; set; }
 
-    public bool SaveImage(INotifier notifier, Guid productId)
+    public async Task SaveImageAsync(INotifier notifier, IFormFile file)
     {
         try
         {
-            if (productId == Guid.Empty)
-            {
+            if (!file.ContentType.StartsWith("image"))
+                notifier.AddNotification(new("File is not an image."));
+
+            if (ProductId == Guid.Empty)
                 notifier.AddNotification(new("Product Id is empty or null."));
-                return false;
-            }
-            
-            if (string.IsNullOrWhiteSpace(FileBase64))
-            {
-                notifier.AddNotification(new("FileBase64 is empty or null."));
-                return false;
-            }
 
-            ProductId = productId;
-            Name = $"{Id}.png";
-            FilePath = Path.Combine("images", "products", ProductId.ToString(), Name);
+            Name = $"{Id}{Path.GetExtension(file.FileName)}";
 
-            var webRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot", "uploads");
-            var fullDirectoryPath = Path.Combine(webRootPath, "images", "products", ProductId.ToString());
+            if (!Directory.Exists(DirectoryPath))
+                Directory.CreateDirectory(DirectoryPath);
 
-            if (!Directory.Exists(fullDirectoryPath))
-                Directory.CreateDirectory(fullDirectoryPath);
+            var fullFilePath = Path.Combine(DirectoryPath, Name);
 
-            var fullFilePath = Path.Combine(fullDirectoryPath, Name);
-
-            var imageBytes = ConvertBase64ToImage(notifier);
-            File.WriteAllBytes(fullFilePath, imageBytes);
-            FilePath = fullFilePath;
-
-            return true;
+            await using var fileStream = new FileStream(fullFilePath, FileMode.Create);
+            await file.CopyToAsync(fileStream);
         }
         catch (Exception ex)
         {
             notifier.AddNotification(new($"Error saving image: {ex.Message}"));
-            return false;
-        }
-    }
-
-    private byte[] ConvertBase64ToImage(INotifier notifier)
-    {
-        try
-        {
-            return Convert.FromBase64String(FileBase64);
-        }
-        catch (FormatException)
-        {
-            notifier.AddNotification(new("Invalid Base64 format."));
-            return [];
         }
     }
 }

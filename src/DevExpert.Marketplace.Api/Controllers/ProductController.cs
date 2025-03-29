@@ -33,4 +33,34 @@ public class ProductController(INotifier notifier, IProductService service)
             : CustomResponse(HttpStatusCode.OK,
                 products.Select(x => new ProductOutputViewModel().FromModel(x)));
     }
+
+    [HttpPost("[action]")]
+    public override async Task<IActionResult> AddAsync([FromForm] ProductInputViewModel inputViewModel)
+    {
+        if (!ModelState.IsValid)
+            return CustomResponse(ModelState);
+
+        var entity = inputViewModel.ToModel();
+
+        await SaveProductImagesAsync(inputViewModel.Images, entity);
+
+        if (notifier.HaveNotification()) return CustomResponse(HttpStatusCode.BadRequest);
+
+        entity = await service.AddAsync(entity);
+
+        return CustomResponse(HttpStatusCode.Created, new ProductOutputViewModel().FromModel(entity));
+    }
+
+    private async Task SaveProductImagesAsync(List<IFormFile> imagesFile, Product product)
+    {
+        var count = 1;
+        foreach (var imageFile in imagesFile)
+        {
+            var image = new Image();
+            image.DisplayPosition = count++;
+            image.ProductId = product.Id;
+            await image.SaveImageAsync(notifier, imageFile);
+            product.Images.Add(image);
+        }
+    }
 }

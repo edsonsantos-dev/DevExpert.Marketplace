@@ -18,7 +18,7 @@ public class ImageOutputViewModel : OutputViewModelBase<Image, ImageOutputViewMo
             Id = model.Id,
             DisplayPosition = model.DisplayPosition,
             IsCover = model.IsCover,
-            FilePath = model.FilePath,
+            FilePath = Path.Combine(model.DirectoryPath, model.Name!),
             AddedBy = model.AddedBy,
             AddedOn = model.AddedOn,
             ModifiedBy = model.ModifiedBy,

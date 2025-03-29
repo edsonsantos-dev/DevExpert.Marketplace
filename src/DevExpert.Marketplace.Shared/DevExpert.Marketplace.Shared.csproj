@@ -13,5 +13,9 @@
     <ItemGroup>
       <ProjectReference Include="..\DevExpert.Marketplace.Data\DevExpert.Marketplace.Data.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.0.0" />
+    </ItemGroup>
     
 </Project>

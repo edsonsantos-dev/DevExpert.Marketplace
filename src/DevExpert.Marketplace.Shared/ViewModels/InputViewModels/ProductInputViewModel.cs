@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using DevExpert.Marketplace.Business.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DevExpert.Marketplace.Shared.ViewModels.InputViewModels;
 
@@ -26,14 +27,14 @@ public class ProductInputViewModel : InputViewModelBase<Product>
     public int Stock { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório")]
-    [Display(Name = "Imagem do Produto")]
-    public List<ImageInputViewModel>? Images { get; set; }
-
-    [Required(ErrorMessage = "O campo {0} é obrigatório")]
     public Guid CategoryId { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório")]
     public Guid SellerId { get; set; }
+    
+    [Required(ErrorMessage = "O campo {0} é obrigatório")]
+    [Display(Name = "Imagens do Produto")]
+    public List<IFormFile> Images { get; set; }
 
     public override Product ToModel()
     {
@@ -44,8 +45,7 @@ public class ProductInputViewModel : InputViewModelBase<Product>
             Price = Price,
             Stock = Stock,
             CategoryId = CategoryId,
-            SellerId = SellerId,
-            Images = Images?.Select(x => x.ToModel()).ToList()
+            SellerId = SellerId
         };
     }
 }
