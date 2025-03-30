@@ -6,5 +6,5 @@ using DevExpert.Marketplace.Business.Models;
 
 namespace DevExpert.Marketplace.Application.AppServices;
 
-public class CategoryAppService(IService<Category> service) 
-    : AppService<Category, CategoryInputViewModel, CategoryOutputViewModel>(service);
+public class CategoryAppService(IService<Category> service)
+    : AppService<Category, CategoryInputViewModel, CategoryOutputViewModel>(service), ICategoryAppService;

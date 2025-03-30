@@ -54,8 +54,8 @@ public static class BootStrapper
 
     private static void RegisterAppServices(IServiceCollection service)
     {
-        service.AddScoped<IAppService<Category, CategoryInputViewModel, CategoryOutputViewModel>, CategoryAppService>();
+        service.AddScoped<ICategoryAppService, CategoryAppService>();
         service.AddScoped<IProductAppService, ProductAppService>();
-        service.AddScoped<IAppService<Seller, SellerInputViewModel, SellerOutputViewModel>, SellerAppService>();
+        service.AddScoped<ISellerAppService, SellerAppService>();
     }
 }
