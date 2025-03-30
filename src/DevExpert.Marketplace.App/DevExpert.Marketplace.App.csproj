@@ -17,8 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DevExpert.Marketplace.Data\DevExpert.Marketplace.Data.csproj" />
-      <ProjectReference Include="..\DevExpert.Marketplace.IoC\DevExpert.Marketplace.IoC.csproj" />
+        <ProjectReference Include="..\DevExpert.Marketplace.Data\DevExpert.Marketplace.Data.csproj" />
+        <ProjectReference Include="..\DevExpert.Marketplace.IoC\DevExpert.Marketplace.IoC.csproj" />
     </ItemGroup>
 
 </Project>
