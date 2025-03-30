@@ -36,14 +36,6 @@ public sealed class MarketplaceContext : DbContext
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MarketplaceContext).Assembly);
 
-        var mutableForeignKeys = modelBuilder.Model
-            .GetEntityTypes()
-            .SelectMany(e =>
-                e.GetForeignKeys());
-
-        foreach (var mutableForeignKey in mutableForeignKeys)
-            mutableForeignKey.DeleteBehavior = DeleteBehavior.ClientSetNull;
-
         base.OnModelCreating(modelBuilder);
     }
     
