@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8"/>
@@ -29,6 +33,12 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Produtos</a>
                     </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
+                        </li>
+                    }
                 </ul>
                 <partial name="_LoginPartial"/>
             </div>
@@ -42,7 +52,7 @@
 </div>
 <footer class="border-top footer">
     <div class="container">
-        &copy; 2025 - DevExpert Marketplace
+        &copy; 2025 - DevExpert Marketplace - by Edson Santos
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
