@@ -21,4 +21,8 @@
         <ProjectReference Include="..\DevExpert.Marketplace.IoC\DevExpert.Marketplace.IoC.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\images\products\" />
+    </ItemGroup>
+
 </Project>

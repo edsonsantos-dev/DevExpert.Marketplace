@@ -1,4 +1,5 @@
 using DevExpert.Marketplace.App.Extensions;
+using DevExpert.Marketplace.Application.Helpers;
 using DevExpert.Marketplace.Data.Context;
 using DevExpert.Marketplace.IoC;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.RegisterDatabaseServices();
 builder.RegisterIoC();
+builder.LoadSettings();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

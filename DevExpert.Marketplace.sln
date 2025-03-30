@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpert.Marketplace.Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpert.Marketplace.App", "src\DevExpert.Marketplace.App\DevExpert.Marketplace.App.csproj", "{BCDB9DDD-8CE1-41A0-AE4A-FCEF5A35C308}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevExpert.Marketplace.Api", "src\DevExpert.Marketplace.Api\DevExpert.Marketplace.Api.csproj", "{279A2CE9-7A7C-4A40-96D0-097DE966B89A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{BCDB9DDD-8CE1-41A0-AE4A-FCEF5A35C308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCDB9DDD-8CE1-41A0-AE4A-FCEF5A35C308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCDB9DDD-8CE1-41A0-AE4A-FCEF5A35C308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279A2CE9-7A7C-4A40-96D0-097DE966B89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279A2CE9-7A7C-4A40-96D0-097DE966B89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279A2CE9-7A7C-4A40-96D0-097DE966B89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279A2CE9-7A7C-4A40-96D0-097DE966B89A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

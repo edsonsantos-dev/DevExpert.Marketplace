@@ -2,7 +2,36 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero">
+    <div class="container">
+        <h2>Bem-vindo ao nosso marketplace premium</h2>
+        <p>Descubra produtos exclusivos com qualidade e elegância incomparáveis.</p>
+        <a class="btn cta-button" asp-area="" asp-controller="Product" asp-action="Index">Explore Agora</a>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4 offset-down">
+                <img
+                    src="images/home/foto_2.jpg"
+                    class="img-fluid"
+                    alt="Foto 2"/>
+            </div>
+
+            <div class="col-md-4 mb-4 offset-up">
+                <img
+                    src="images/home/foto_1.jpg"
+                    class="img-fluid"
+                    alt="Foto 1"/>
+            </div>
+
+            <div class="col-md-4 mb-4 offset-down">
+                <img
+                    src="images/home/foto_3.jpg"
+                    class="img-fluid"
+                    alt="Foto 3"/>
+            </div>
+        </div>
+    </div>
+</section>

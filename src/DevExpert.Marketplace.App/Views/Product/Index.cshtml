@@ -1,0 +1,88 @@
+@{
+  ViewData["Title"] = "Home Page";
+}
+
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+
+      <partial name="_FilterCategory"/>
+
+      <!-- Coluna DIREITA: Produtos -->
+      <div class="col-md-8">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- Produto 1 -->
+          <div class="col">
+            <div class="product-card">
+              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
+              <div class="product-info">
+                <h5>Produto 1</h5>
+                <p>Descrição breve do produto.</p>
+                <div class="price">R$ 299,90</div>
+              </div>
+            </div>
+          </div>
+          <!-- Produto 2 -->
+          <div class="col">
+            <div class="product-card">
+              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
+              <div class="product-info">
+                <h5>Produto 2</h5>
+                <p>Descrição breve do produto.</p>
+                <div class="price">R$ 399,90</div>
+              </div>
+            </div>
+          </div>
+          <!-- Produto 3 -->
+          <div class="col">
+            <div class="product-card">
+              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
+              <div class="product-info">
+                <h5>Produto 3</h5>
+                <p>Descrição breve do produto.</p>
+                <div class="price">R$ 499,90</div>
+              </div>
+            </div>
+          </div>
+          <!-- Produto 4 -->
+          <div class="col">
+            <div class="product-card">
+              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
+              <div class="product-info">
+                <h5>Produto 4</h5>
+                <p>Descrição breve do produto.</p>
+                <div class="price">R$ 599,90</div>
+              </div>
+            </div>
+          </div>
+          <!-- Produto 5 -->
+          <div class="col">
+            <div class="product-card">
+              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
+              <div class="product-info">
+                <h5>Produto 5</h5>
+                <p>Descrição breve do produto.</p>
+                <div class="price">R$ 699,90</div>
+              </div>
+            </div>
+          </div>
+          <!-- Produto 6 -->
+          <div class="col">
+            <div class="product-card">
+              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
+              <div class="product-info">
+                <h5>Produto 6</h5>
+                <p>Descrição breve do produto.</p>
+                <div class="price">R$ 799,90</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Botão "Carregar Mais Produtos" -->
+        <div class="text-center mt-4">
+          <button class="btn btn-load-more">Carregar Mais Produtos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
