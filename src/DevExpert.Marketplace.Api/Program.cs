@@ -1,6 +1,6 @@
-using DevExpert.Marketplace.App.Extensions;
 using DevExpert.Marketplace.Application.Helpers;
 using DevExpert.Marketplace.IoC;
+using DevExpert.Marketplace.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

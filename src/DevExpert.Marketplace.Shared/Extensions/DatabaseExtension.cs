@@ -1,9 +1,13 @@
 using DevExpert.Marketplace.Business.Models;
 using DevExpert.Marketplace.Data.Context;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace DevExpert.Marketplace.App.Extensions;
+namespace DevExpert.Marketplace.Shared.Extensions;
 
 public static class DatabaseExtension
 {
