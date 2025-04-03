@@ -26,10 +26,6 @@
     transition: background-color 0.3s;
 }
 
-.btn-delete-category:hover {
-    background-color: #E74C3C;
-}
-
 .list-group-item {
     display: flex;
     justify-content: space-between;
@@ -56,4 +52,17 @@
 
 .btn-icon:hover {
     color: var(--accent-color);
+}
+
+.btn-icon-trash {
+    border: none;
+    background: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.btn-icon-trash:hover {
+    color: #E74C3C;
 }

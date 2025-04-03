@@ -1,20 +1,22 @@
 /* Filter Button */
 .btn-filter {
-    background-color: white; /* Fundo branco */
-    border: none; /* Sem bordas */
-    padding: 0.5rem 1rem; /* Espaçamento interno */
-    color: var(--accent-color); /* Cor do ícone e texto */
-    font-size: 1rem; /* Tamanho do texto */
-    display: inline-flex; /* Alinha o ícone e o texto horizontalmente */
-    align-items: center; /* Centraliza o ícone e o texto verticalmente */
-    gap: 0.5rem; /* Espaço entre o ícone e o texto */
-    border-radius: 0.25rem; /* Bordas arredondadas */
+    background-color: white;
+    border: 1px solid var(--accent-color);
+    padding: 0.5rem 1rem;
+    color: var(--accent-color);
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
     cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 
 .btn-filter:hover {
-    color: var(--complementary-color); /* Cor do ícone e texto no hover */
-    background-color: #f0f0f0; /* Fundo leve no hover */
+    color: var(--complementary-color);
+    background-color: #f0f0f0;
+    border: 1px solid var(--complementary-color);
 }
 
 /* Modal Overlay */

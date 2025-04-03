@@ -1,12 +1,15 @@
+using DevExpert.Marketplace.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
-public class CategoryController : Controller
+public class CategoryController(ICategoryAppService appService) : Controller
 {
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var categories = await appService.GetAllAsync();
+        
+        return View(categories.ToList());
     }
 }

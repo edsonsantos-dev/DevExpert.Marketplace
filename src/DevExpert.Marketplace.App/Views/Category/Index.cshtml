@@ -1,103 +1,37 @@
+@model List<DevExpert.Marketplace.Application.ViewModels.OutputViewModels.CategoryOutputViewModel>
+
 @{
-    ViewData["Title"] = "Categorias";
+  ViewData["Title"] = "Categorias";
 }
 
 <div class="container py-5">
-    <!-- Cabeçalho com título e opção de incluir nova categoria -->
-    <div class="header-section">
-      <h1>Lista de Categorias</h1>
-      <div>
-        <a href="#" class="new-category-link me-3" title="Nova Categoria">
-          <i class="bi bi-plus-circle"></i> Nova Categoria
-        </a>
-      </div>
+  <!-- Cabeçalho com título e opção de incluir nova categoria -->
+  <div class="header-section">
+    <h1>Lista de Categorias</h1>
+    <div>
+      <a href="#" class="new-category-link me-3" title="Nova Categoria">
+        <i class="bi bi-plus-circle"></i> Nova Categoria
+      </a>
     </div>
-
-    <!-- Lista de Categorias -->
-    <ul class="list-group">
-      <!-- Item 1 -->
-      <li class="list-group-item">
-        <span>Categoria 1</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-      <!-- Item 2 -->
-      <li class="list-group-item">
-        <span>Categoria 2</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-      <!-- Item 3 -->
-      <li class="list-group-item">
-        <span>Categoria 3</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-      <!-- Item 4 -->
-      <li class="list-group-item">
-        <span>Categoria 4</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-      <!-- Item 5 -->
-      <li class="list-group-item">
-        <span>Categoria 5</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-      <!-- Item 6 -->
-      <li class="list-group-item">
-        <span>Categoria 6</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-      <!-- Item 7 -->
-      <li class="list-group-item">
-        <span>Categoria 7</span>
-        <div>
-          <button class="btn-icon me-2" title="Editar">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="btn-icon" title="Excluir">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </li>
-    </ul>
   </div>
+
+  <!-- Lista de Categorias -->
+  <ul class="list-group">
+
+    @foreach (var category in Model)
+    {
+      <li class="list-group-item">
+        <span>@category.Name</span>
+        <div>
+          <button class="btn-icon me-2" title="Editar">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn-icon-trash" title="Excluir">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </li>
+    }
+      
+  </ul>
+</div>
