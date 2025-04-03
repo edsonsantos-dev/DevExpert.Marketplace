@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
 
-      <partial name="_FilterCategory"/>
+      @await Component.InvokeAsync("CategoryFilter")
 
       <!-- Coluna DIREITA: Produtos -->
       <div class="col-md-8">
