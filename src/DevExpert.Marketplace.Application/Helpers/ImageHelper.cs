@@ -21,7 +21,10 @@ public static class ImageHelper
 
     public static void DeleteImage(Guid id)
     {
-        var directoryPath = Path.Combine(Settings.Instance?.ProductImageDirectoryPath!, id.ToString());
+        var directoryPath = Path.Combine(
+                Settings.Instance?.ProductImageDirectoryPath!,
+                id.ToString())
+            .Replace("\\", "/").Replace("//", "/");
 
         if (!Directory.Exists(directoryPath))
             return;
@@ -47,8 +50,10 @@ public static class ImageHelper
 
             image.Name = $"{image.Id}{Path.GetExtension(imageFile.FileName)}";
 
-            var directoryPath =
-                Path.Combine(Settings.Instance?.ProductImageDirectoryPath!, image.ProductId.ToString()!);
+            var directoryPath = Path.Combine(
+                    Settings.Instance?.ProductImageDirectoryPath!,
+                    image.ProductId.ToString()!)
+                .Replace("\\", "/").Replace("//", "/");
 
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);

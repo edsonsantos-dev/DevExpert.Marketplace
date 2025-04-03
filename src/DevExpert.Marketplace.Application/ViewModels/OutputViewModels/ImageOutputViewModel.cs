@@ -22,7 +22,7 @@ public class ImageOutputViewModel : OutputViewModelBase<Image, ImageOutputViewMo
             FilePath = Path.Combine(
                 Settings.Instance?.ProductImageDirectoryPath!,
                 model.ProductId.ToString()!,
-                model.Name!),
+                model.Name!).Replace("\\", "/").Replace("//", "/"),
             AddedBy = model.AddedBy,
             AddedOn = model.AddedOn,
             ModifiedBy = model.ModifiedBy,
