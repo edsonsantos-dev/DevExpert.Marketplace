@@ -23,6 +23,7 @@ public class SellerInputViewModel : InputViewModelBase<Seller>
     {
         return new Seller
         {
+            Id = Id.GetValueOrDefault(),
             FullName = FullName,
             Email = Email,
             PhoneNumber = PhoneNumber

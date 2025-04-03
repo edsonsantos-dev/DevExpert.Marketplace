@@ -31,6 +31,33 @@ public class CategoryController(ICategoryAppService appService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Route("editar-categoria/{id:guid}")]
+    public async Task<IActionResult> Edit(Guid id)
+    {
+        var category = await appService.GetByIdAsync(id);
+
+        if (category == null) return NotFound();
+
+        return View(new CategoryInputViewModel
+        {
+            Id = category.Id,
+            Name = category.Name,
+            Description = category.Description,
+        });
+    }
+
+    [Route("editar-categoria/{id:guid}")]
+    [HttpPost]
+    public async Task<IActionResult> Edit(Guid id, CategoryInputViewModel inputViewModel)
+    {
+        if (id != inputViewModel.Id) return NotFound();
+        if (!ModelState.IsValid) return View(inputViewModel);
+
+        await appService.UpdateAsync(inputViewModel);
+
+        return RedirectToAction(nameof(Index));
+    }
+
     [Route("excluir-categoria/{id:guid}")]
     [HttpPost, ActionName("Delete")]
     public async Task<IActionResult> Delete(Guid id)

@@ -40,6 +40,7 @@ public class ProductInputViewModel : InputViewModelBase<Product>
     {
         return new Product
         {
+            Id = Id.GetValueOrDefault(),
             Name = Name,
             Description = Description,
             Price = Price,

@@ -23,9 +23,11 @@
             <li class="list-group-item">
                 <span>@category.Name</span>
                 <div>
-                    <button class="btn-icon me-2" title="Editar">
+                    <a class="btn-icon me-2 d-inline-flex align-items-center" title="Editar" asp-action="Edit"
+                       asp-route-id="@category.Id">
                         <i class="bi bi-pencil"></i>
-                    </button>
+                    </a>
+
                     <button type="button" class="btn-icon-trash" title="Excluir" data-bs-toggle="modal"
                             data-bs-target="#deleteModal" data-category-id="@category.Id">
                         <i class="bi bi-trash"></i>
@@ -83,7 +85,7 @@
 
             var form = document.getElementById('deleteForm');
             form.setAttribute('action', `/excluir-categoria/${categoryId}`);
-            form.setAttribute('method', 'post'); 
+            form.setAttribute('method', 'post');
 
             var methodInput = document.createElement('input');
             methodInput.setAttribute('type', 'hidden');

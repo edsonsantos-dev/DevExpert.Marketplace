@@ -35,7 +35,7 @@ public class AppService<TEntity, TInputViewModel, TOutputViewModel>(IService<TEn
     public virtual async Task<TOutputViewModel> UpdateAsync(TInputViewModel inputViewModel)
     {
         var entity = inputViewModel.ToModel();
-        entity = await service.AddAsync(entity);
+        entity = await service.UpdateAsync(entity);
 
         return new TOutputViewModel().FromModel(entity);
     }

@@ -19,6 +19,7 @@ public class CategoryInputViewModel : InputViewModelBase<Category>
     {
         return new Category
         {
+            Id = Id.GetValueOrDefault(),
             Name = Name,
             Description = Description
         };
