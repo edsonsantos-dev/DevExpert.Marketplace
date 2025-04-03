@@ -66,3 +66,21 @@
 .btn-icon-trash:hover {
     color: #E74C3C;
 }
+
+.modal-content {
+    padding: 20px;
+    border-radius: 1rem;
+}
+
+.btn-danger {
+    background-color: #E74C3C;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #C0392B;
+}
+
+.btn-outline-secondary {
+    border: 1px solid #ddd;
+}

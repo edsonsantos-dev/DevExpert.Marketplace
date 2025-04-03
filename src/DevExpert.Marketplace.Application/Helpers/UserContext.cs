@@ -8,9 +8,15 @@ public class UserContext(IHttpContextAccessor accessor) : IUserContext
 {
     public Guid GetUserId()
     {
-        return !IsAuthenticated()
-            ? Guid.Empty
-            : Guid.Parse(accessor.HttpContext!.User.FindFirstValue("UserId") ?? string.Empty);
+        if (!IsAuthenticated())
+            return Guid.Empty;
+
+        var userIdClaim = accessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier)
+                          ?? accessor.HttpContext!.User.FindFirstValue("UserId"); // Para JWTs (sub)
+
+        return Guid.TryParse(userIdClaim, out var userId) 
+            ? userId 
+            : Guid.Empty;
     }
 
     public bool IsAuthenticated()
