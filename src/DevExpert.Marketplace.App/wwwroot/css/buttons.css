@@ -1,0 +1,22 @@
+.cta-button {
+  background-color: var(--accent-color);
+  color: var(--secondary-color);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--complementary-color);
+}
+
+.btn-load-more {
+  background-color: var(--accent-color);
+  border: none;
+  color: var(--secondary-color);
+  transition: background-color 0.3s ease;
+}
+
+.btn-load-more:hover {
+  background-color: var(--complementary-color);
+}

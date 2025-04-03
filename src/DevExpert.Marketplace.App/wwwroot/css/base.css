@@ -1,0 +1,14 @@
+body {
+    background-color: var(--background-color);
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 80px; /* Espaço para o footer fixo */
+}
+
+.offset-up {
+    margin-top: -30px;
+}
+
+.offset-down {
+    margin-top: 30px;
+}

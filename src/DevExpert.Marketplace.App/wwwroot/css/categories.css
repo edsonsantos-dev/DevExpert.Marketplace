@@ -1,0 +1,59 @@
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.new-category-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.new-category-link:hover {
+    color: #2980B9;
+}
+
+.btn-add-category {
+    background-color: var(--accent-color);
+    border: none;
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
+}
+
+.btn-delete-category:hover {
+    background-color: #E74C3C;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--complementary-color);
+    border-radius: 0.25rem;
+    margin-bottom: 8px;
+    padding: 0.75rem 1rem;
+}
+
+.list-group-item:hover {
+    background-color: var(--complementary-color);
+}
+
+.btn-icon {
+    border: none;
+    background: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.btn-icon:hover {
+    color: var(--accent-color);
+}

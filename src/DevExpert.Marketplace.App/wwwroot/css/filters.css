@@ -1,0 +1,21 @@
+.filter-container {
+    background-color: var(--secondary-color);
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-categories {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.filter-categories li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.filter-categories li a:hover {
+    color: var(--accent-color);
+}

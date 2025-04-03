@@ -1,0 +1,11 @@
+:root {
+    --primary-color: #2C3E50;       /* Azul Marinho Escuro */
+    --secondary-color: #FFFFFF;     /* Branco */
+    --background-color: #ECF0F1;      /* Cinza Claro com toque de azul */
+    --accent-color: #F39C12;        /* Laranja Queimado (dá energia e modernidade) */
+    --complementary-color: #95A5A6;   /* Cinza Médio, para equilíbrio */
+}
+
+* {
+    font-family: 'Lexend', sans-serif;
+}
