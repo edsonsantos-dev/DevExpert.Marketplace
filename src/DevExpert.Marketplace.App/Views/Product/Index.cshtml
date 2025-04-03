@@ -1,84 +1,56 @@
+@inject SignInManager<IdentityUser> SignInManager
+
+@using System.Globalization
+@using Microsoft.AspNetCore.Identity
+@model List<DevExpert.Marketplace.Application.ViewModels.OutputViewModels.ProductOutputViewModel>
+
 @{
   ViewData["Title"] = "Produtos";
 }
 
 <section class="py-5">
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
 
-      @await Component.InvokeAsync("CategoryFilter")
-
-      <!-- Coluna DIREITA: Produtos -->
-      <div class="col-md-8">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <!-- Produto 1 -->
-          <div class="col">
-            <div class="product-card">
-              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
-              <div class="product-info">
-                <h5>Produto 1</h5>
-                <p>Descrição breve do produto.</p>
-                <div class="price">R$ 299,90</div>
-              </div>
-            </div>
-          </div>
-          <!-- Produto 2 -->
-          <div class="col">
-            <div class="product-card">
-              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
-              <div class="product-info">
-                <h5>Produto 2</h5>
-                <p>Descrição breve do produto.</p>
-                <div class="price">R$ 399,90</div>
-              </div>
-            </div>
-          </div>
-          <!-- Produto 3 -->
-          <div class="col">
-            <div class="product-card">
-              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
-              <div class="product-info">
-                <h5>Produto 3</h5>
-                <p>Descrição breve do produto.</p>
-                <div class="price">R$ 499,90</div>
-              </div>
-            </div>
-          </div>
-          <!-- Produto 4 -->
-          <div class="col">
-            <div class="product-card">
-              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
-              <div class="product-info">
-                <h5>Produto 4</h5>
-                <p>Descrição breve do produto.</p>
-                <div class="price">R$ 599,90</div>
-              </div>
-            </div>
-          </div>
-          <!-- Produto 5 -->
-          <div class="col">
-            <div class="product-card">
-              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
-              <div class="product-info">
-                <h5>Produto 5</h5>
-                <p>Descrição breve do produto.</p>
-                <div class="price">R$ 699,90</div>
-              </div>
-            </div>
-          </div>
-          <!-- Produto 6 -->
-          <div class="col">
-            <div class="product-card">
-              <div class="product-image" style="background-image: url('https://via.placeholder.com/350x200');"></div>
-              <div class="product-info">
-                <h5>Produto 6</h5>
-                <p>Descrição breve do produto.</p>
-                <div class="price">R$ 799,90</div>
-              </div>
-            </div>
-          </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Category Filter -->
+        <div>
+          @await Component.InvokeAsync("CategoryFilter")
         </div>
-        <!-- Botão "Carregar Mais Produtos" -->
+
+        <!-- Novo Produto -->
+        @if (SignInManager.IsSignedIn(User))
+        {
+          <a href="#" class="new-product-link me-3" title="Novo Produto">
+            <i class="bi bi-plus-circle"></i> Novo Produto
+          </a>
+        }
+      </div>
+
+      <div class="col-12">
+        <div class="row g-4 justify-content-center">
+          @foreach (var product in Model)
+          {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="product-card">
+                @{
+                  var image = product.Images.FirstOrDefault(x => x.IsCover);
+                  var filePath = image?.FilePath;
+
+                  <div class="product-image"
+                       style="background-image: url('@filePath');">
+                  </div>
+                }
+                <div class="product-info">
+                  <h5>@product.Name</h5>
+                  <p>@product.Description</p>
+                  <div class="price">@product.Price.ToString("C", new CultureInfo("pt-BR"))</div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
         <div class="text-center mt-4">
           <button class="btn btn-load-more">Carregar Mais Produtos</button>
         </div>

@@ -1,12 +1,14 @@
+using DevExpert.Marketplace.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
-public class ProductController : Controller
+public class ProductController(IProductAppService appService) : Controller
 {
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var products = await appService.GetAllAsync();
+        return View(products.ToList());
     }
 }
