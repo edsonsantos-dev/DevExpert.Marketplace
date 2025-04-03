@@ -1,9 +1,11 @@
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
+[Authorize]
 public class CategoryController(ICategoryAppService appService) : Controller
 {
     [Route("lista-de-categorias")]
