@@ -21,7 +21,7 @@
         <!-- Novo Produto -->
         @if (SignInManager.IsSignedIn(User))
         {
-          <a href="#" class="new-product-link me-3" title="Novo Produto">
+          <a class="new-product-link me-3" title="Novo Produto" asp-action="Create">
             <i class="bi bi-plus-circle"></i> Novo Produto
           </a>
         }

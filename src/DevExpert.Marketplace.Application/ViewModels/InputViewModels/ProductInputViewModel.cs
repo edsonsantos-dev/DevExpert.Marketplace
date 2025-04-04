@@ -23,7 +23,7 @@ public class ProductInputViewModel : InputViewModelBase<Product>
 
     [Required(ErrorMessage = "O campo {0} é obrigatório")]
     [Range(1, int.MaxValue, ErrorMessage = "O campo {0} precisa ter entre {1} e {2} caracteres")]
-    [Display(Name = "Nome do Produto")]
+    [Display(Name = "Estoque do Produto")]
     public int Stock { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório")]

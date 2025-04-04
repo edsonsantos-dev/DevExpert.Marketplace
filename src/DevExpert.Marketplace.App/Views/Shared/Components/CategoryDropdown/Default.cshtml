@@ -1,0 +1,6 @@
+@model List<DevExpert.Marketplace.Application.ViewModels.OutputViewModels.CategoryOutputViewModel>
+
+@foreach (var category in Model)
+{
+    <option value="@category.Id">@category.Name</option>
+}

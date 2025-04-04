@@ -68,7 +68,6 @@ public sealed class MarketplaceContext : DbContext
     {
         var entityEntries = ChangeTracker.Entries()
             .Where(x => x.Entity.GetType().GetProperty("AddedOn") != null ||
-                        x.Entity.GetType().GetProperty("Id") != null ||
                         x.Entity.GetType().GetProperty("AddedBy") != null);
 
         foreach (var entityEntry in entityEntries)
@@ -76,7 +75,6 @@ public sealed class MarketplaceContext : DbContext
             var isAddedState = entityEntry.State == EntityState.Added;
             var isModifiedState = entityEntry.State == EntityState.Modified;
 
-            SetPropertyIfNotNull(entityEntry, "Id", Guid.NewGuid(), isAddedState, isModifiedState);
             SetPropertyIfNotNull(entityEntry, "AddedOn", DateTime.Now, isAddedState, isModifiedState);
             SetPropertyIfNotNull(entityEntry, "AddedBy", UserId, isAddedState, isModifiedState);
         }

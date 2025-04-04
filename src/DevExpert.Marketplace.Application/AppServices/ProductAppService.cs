@@ -2,6 +2,7 @@ using DevExpert.Marketplace.Application.Helpers;
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
 using DevExpert.Marketplace.Application.ViewModels.OutputViewModels;
+using DevExpert.Marketplace.Business.Interfaces;
 using DevExpert.Marketplace.Business.Interfaces.Notifications;
 using DevExpert.Marketplace.Business.Interfaces.Services;
 using DevExpert.Marketplace.Business.Models;
@@ -10,12 +11,14 @@ namespace DevExpert.Marketplace.Application.AppServices;
 
 public class ProductAppService(
     IProductService service,
+    IUserContext userContext,
     INotifier notifier)
     : AppService<Product, ProductInputViewModel, ProductOutputViewModel>(service), IProductAppService
 {
     public override async Task<ProductOutputViewModel> AddAsync(ProductInputViewModel inputViewModel)
     {
         var product = inputViewModel.ToModel();
+        product.SellerId = userContext.GetUserId();
         await ImageHelper.CreateImageAsync(product, inputViewModel.Images, notifier);
         product = await service.AddAsync(product);
         return new ProductOutputViewModel().FromModel(product);
