@@ -6,6 +6,9 @@ namespace DevExpert.Marketplace.Application.Helpers;
 
 public static class ImageHelper
 {
+    public static bool IsWebApi;
+    private static Settings Settings => Settings.Instance!;
+
     public static async Task CreateImageAsync(Product product, List<IFormFile> imagesFile, INotifier notifier)
     {
         var count = 1;
@@ -21,15 +24,30 @@ public static class ImageHelper
 
     public static void DeleteImage(Guid id)
     {
-        var directoryPath = Path.Combine(
-                Settings.Instance?.ProductImageDirectoryPath!,
-                id.ToString())
-            .Replace("\\", "/").Replace("//", "/");
+        var directoryPath =Combine(id);
 
         if (!Directory.Exists(directoryPath))
             return;
 
         Directory.Delete(directoryPath, true);
+    }
+
+    public static string Combine(Guid id, string name)
+    {
+        if (IsWebApi)
+        {
+            return Path.Combine(
+                Settings.AppPath,
+                Settings.RootPath,
+                Settings.ProductImageDirectoryPath,
+                id.ToString(),
+                name);
+        }
+
+        return Path.Combine(
+            Settings.ProductImageDirectoryPath,
+            id.ToString(),
+            name);
     }
 
     private static async Task SaveAsync(INotifier notifier, Image image, IFormFile imageFile)
@@ -50,10 +68,7 @@ public static class ImageHelper
 
             image.Name = $"{image.Id}{Path.GetExtension(imageFile.FileName)}";
 
-            var directoryPath = Path.Combine(
-                    Settings.Instance?.ProductImageDirectoryPath!,
-                    image.ProductId.ToString()!)
-                .Replace("\\", "/").Replace("//", "/");
+            var directoryPath = Combine(image.ProductId.GetValueOrDefault());
 
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
@@ -67,5 +82,22 @@ public static class ImageHelper
         {
             notifier.AddNotification(new($"Error saving image: {ex.Message}"));
         }
+    }
+
+    private static string Combine(Guid id)
+    {
+        if (IsWebApi)
+        {
+            return Path.Combine(
+                Settings.AppPath,
+                Settings.RootPath,
+                Settings.ProductImageDirectoryPath,
+                id.ToString());
+        }
+
+        return Path.Combine(
+            Settings.RootPath,
+            Settings.ProductImageDirectoryPath,
+            id.ToString());
     }
 }

@@ -19,10 +19,9 @@ public class ImageOutputViewModel : OutputViewModelBase<Image, ImageOutputViewMo
             Id = model.Id,
             DisplayPosition = model.DisplayPosition,
             IsCover = model.IsCover,
-            FilePath = Path.Combine(
-                Settings.Instance?.ProductImageDirectoryPath!,
-                model.ProductId.ToString()!,
-                model.Name!).Replace("\\", "/").Replace("//", "/"),
+            FilePath = ImageHelper.Combine(
+                model.ProductId.GetValueOrDefault(),
+                model.Name!),
             AddedBy = model.AddedBy,
             AddedOn = model.AddedOn,
             ModifiedBy = model.ModifiedBy,

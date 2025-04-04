@@ -16,6 +16,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<IdentityContext>();
 builder.Services.AddControllersWithViews();
 
+ImageHelper.IsWebApi = false;
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -13,6 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+ImageHelper.IsWebApi = true;
+
 var app = builder.Build();
 
 app.UseStaticFiles();

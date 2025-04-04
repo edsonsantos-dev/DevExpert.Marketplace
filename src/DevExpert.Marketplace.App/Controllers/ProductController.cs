@@ -1,10 +1,13 @@
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
+using DevExpert.Marketplace.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
-public class ProductController(IProductAppService appService) : Controller
+public class ProductController(
+    IProductAppService appService,
+    IUserContext userContext) : Controller
 {
     [Route("lista-de-produtos")]
     public async Task<IActionResult> Index()
@@ -24,6 +27,8 @@ public class ProductController(IProductAppService appService) : Controller
     public async Task<IActionResult> Create(ProductInputViewModel inputViewModel)
     {
         if (!ModelState.IsValid) return View(inputViewModel);
+
+        inputViewModel.SellerId = userContext.GetUserId();
 
         var outputViewModel = await appService.AddAsync(inputViewModel);
 

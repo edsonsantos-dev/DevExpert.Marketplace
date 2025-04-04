@@ -19,7 +19,7 @@ public class CategoryInputViewModel : InputViewModelBase<Category>
     {
         return new Category
         {
-            Id = Id.GetValueOrDefault(),
+            Id = Id.HasValue ? Id.Value : Guid.NewGuid(),
             Name = Name,
             Description = Description
         };
