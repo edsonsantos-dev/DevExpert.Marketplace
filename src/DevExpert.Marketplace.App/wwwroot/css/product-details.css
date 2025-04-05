@@ -1,0 +1,71 @@
+.product-image-container {
+    flex-basis: 80%;
+    max-width: 600px;
+}
+
+.product-image {
+    width: 100%;
+    height: 80vh; /* Tamanho fixo da imagem */
+    object-fit: cover;
+}
+
+.product-details {
+    flex-basis: 40%;
+    max-width: 500px;
+}
+
+/* Estilização dos botões do carrossel */
+.custom-control {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para contraste */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev {
+    left: 15px;
+}
+
+.carousel-control-next {
+    right: 15px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1); /* Deixa os ícones brancos */
+    width: 20px;
+    height: 20px;
+}
+
+.custom-control:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Mais escuro ao passar o mouse */
+}
+
+@media (max-width: 768px) {
+    .product-details {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    .product-image {
+        height: 50vh;
+    }
+
+    .custom-control {
+        width: 30px;
+        height: 30px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 15px;
+        height: 15px;
+    }
+}

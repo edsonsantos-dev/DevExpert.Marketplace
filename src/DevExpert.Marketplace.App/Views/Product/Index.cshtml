@@ -32,21 +32,18 @@
           @foreach (var product in Model)
           {
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="product-card">
+              <a asp-action="Details" asp-route-id="@product.Id" class="product-card text-decoration-none">
                 @{
                   var image = product.Images!.FirstOrDefault(x => x.IsCover);
-                  var filePath = image?.FilePath;
-
-                  <div class="product-image"
-                       style="background-image: url('@filePath');">
-                  </div>
+                  var filePath = image?.FilePath ?? "https://via.placeholder.com/350x200"; // Caso não tenha imagem
                 }
+                <div class="product-image" style="background-image: url('@filePath'); height: 200px; background-size: cover;"></div>
                 <div class="product-info">
                   <h5>@product.Name</h5>
                   <p>@product.Description</p>
                   <div class="price">@product.Price.ToString("C", new CultureInfo("pt-BR"))</div>
                 </div>
-              </div>
+              </a>
             </div>
           }
         </div>

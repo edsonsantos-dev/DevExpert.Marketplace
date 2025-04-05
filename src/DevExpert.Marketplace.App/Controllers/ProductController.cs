@@ -34,4 +34,11 @@ public class ProductController(
 
         return RedirectToAction(nameof(Index));
     }
+    
+    [Route("detalhes-do-produto/{id:guid}")]
+    public async Task<IActionResult> Details(Guid id)
+    {
+        var product = await appService.GetByIdAsync(id);
+        return View(product);
+    }
 }

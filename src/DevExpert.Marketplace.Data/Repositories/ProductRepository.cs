@@ -13,6 +13,8 @@ public class ProductRepository(MarketplaceContext context)
         return await DbSet
             .AsNoTracking()
             .Include(x=> x.Images)
+            .Include(x => x.Category)
+            .Include(x => x.Seller)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
