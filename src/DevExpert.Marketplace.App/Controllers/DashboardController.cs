@@ -1,9 +1,11 @@
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
+[Authorize]
 public class DashboardController(
     ICategoryAppService categoryService,
     IProductAppService productService,

@@ -20,3 +20,7 @@
 .btn-load-more:hover {
   background-color: var(--complementary-color);
 }
+
+.remove-image-btn {
+  margin-top: 5px;
+}

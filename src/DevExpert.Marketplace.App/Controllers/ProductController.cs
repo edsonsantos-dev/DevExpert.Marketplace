@@ -1,14 +1,17 @@
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
 using DevExpert.Marketplace.Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
+[Authorize]
 public class ProductController(
     IProductAppService appService,
     IUserContext userContext) : Controller
 {
+    [AllowAnonymous]
     [Route("lista-de-produtos")]
     public async Task<IActionResult> Index()
     {
@@ -35,6 +38,7 @@ public class ProductController(
         return RedirectToAction("Index", "Dashboard");
     }
 
+    [AllowAnonymous]
     [Route("detalhes-do-produto/{id:guid}")]
     public async Task<IActionResult> Details(Guid id)
     {
