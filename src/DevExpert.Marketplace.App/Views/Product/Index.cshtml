@@ -1,7 +1,4 @@
-@inject SignInManager<IdentityUser> SignInManager
-
 @using System.Globalization
-@using Microsoft.AspNetCore.Identity
 @model List<DevExpert.Marketplace.Application.ViewModels.OutputViewModels.ProductOutputViewModel>
 
 @{
@@ -17,14 +14,6 @@
         <div>
           @await Component.InvokeAsync("CategoryFilter")
         </div>
-
-        <!-- Novo Produto -->
-        @if (SignInManager.IsSignedIn(User))
-        {
-          <a class="new-product-link me-3" title="Novo Produto" asp-action="Create">
-            <i class="bi bi-plus-circle"></i> Novo Produto
-          </a>
-        }
       </div>
 
       <div class="col-12">
@@ -37,7 +26,8 @@
                   var image = product.Images!.FirstOrDefault(x => x.IsCover);
                   var filePath = image?.FilePath ?? "https://via.placeholder.com/350x200"; // Caso não tenha imagem
                 }
-                <div class="product-image" style="background-image: url('@filePath'); height: 200px; background-size: cover;"></div>
+                <div class="product-image"
+                     style="background-image: url('@filePath'); height: 200px; background-size: cover;"></div>
                 <div class="product-info">
                   <h5>@product.Name</h5>
                   <p>@product.Description</p>
@@ -49,7 +39,7 @@
         </div>
 
         <div class="text-center mt-4">
-          <button class="btn btn-load-more">Carregar Mais Produtos</button>
+          <button class="btn btn-load-more">Carregar Produtos</button>
         </div>
       </div>
     </div>

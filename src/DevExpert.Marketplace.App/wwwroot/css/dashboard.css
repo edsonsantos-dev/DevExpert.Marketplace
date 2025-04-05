@@ -1,0 +1,18 @@
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #f0f4f7;
+    border-color: #ddd #ddd #f0f4f7;
+}
+
+.nav-tabs .nav-link {
+    color: #333;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #000;
+}

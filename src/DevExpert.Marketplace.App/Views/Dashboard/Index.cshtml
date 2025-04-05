@@ -1,0 +1,124 @@
+@model Tuple<List<DevExpert.Marketplace.Application.ViewModels.OutputViewModels.CategoryOutputViewModel>, List<DevExpert.Marketplace.Application.ViewModels.OutputViewModels.ProductOutputViewModel>>
+
+@{
+    ViewData["Title"] = "Dashboard";
+    var products = Model.Item2;
+    var categories = Model.Item1;
+}
+
+<h3 class="row justify-content-center">@ViewData["Title"]</h3>
+<hr/>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10 p-4" style="background-color: #f0f4f7; border-radius: 8px;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="fw-bold">Dashboard</h2>
+            </div>
+
+            <div class="row g-4 mb-4">
+                <!-- Card 1 -->
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm">
+                        <h5>Total de Categorias</h5>
+                        <p class="display-6">@categories.Count</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm">
+                        <h5>Total de Produtos</h5>
+                        <p class="display-6">@products.Count</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm">
+                        <h5>Novos Produtos (Hoje)</h5>
+                        <p class="display-6">
+                            @products.Where(x => x.AddedOn.Date == DateTime.Today).Count()
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botões para exibir Categorias ou Produtos -->
+            <div class="d-flex justify-content-center mb-4">
+                <button class="btn btn-outline-success me-2" type="button" id="showCategories">Categorias</button>
+                <button class="btn btn-outline-secondary" type="button" id="showProducts">Produtos</button>
+            </div>
+
+            <!-- Lista de Categorias -->
+            <div id="categoryList" class="mb-4" style="display: none;">
+                <h3>Categorias</h3>
+                <ul class="list-group">
+                    @foreach (var category in categories)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@category.Name</span>
+                            <div>
+                                <a class="btn-icon me-2 d-inline-flex align-items-center" title="Editar"
+                                   asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <button type="button" class="btn-icon-trash" title="Excluir" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal" data-category-id="@category.Id">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Lista de Produtos -->
+            <div id="productList" style="display: none;">
+                <h3>Produtos</h3>
+                <ul class="list-group">
+                    @foreach (var product in products)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>@product.Name</span>
+                            <div>
+                                <a class="btn-icon me-2 d-inline-flex align-items-center" title="Editar"
+                                   asp-controller="Product" asp-action="Edit"
+                                   asp-route-id="@product.Id">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <button type="button" class="btn-icon-trash" title="Excluir" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal" data-category-id="@product.Id">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_DeleteCategory" />
+<partial name="_DeleteProduct" />
+
+<!-- Script para alternar entre Categorias e Produtos -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const showCategoriesButton = document.getElementById('showCategories');
+        const showProductsButton = document.getElementById('showProducts');
+        const categoryList = document.getElementById('categoryList');
+        const productList = document.getElementById('productList');
+
+        showCategoriesButton.addEventListener('click', function () {
+            categoryList.style.display = 'block';
+            productList.style.display = 'none';
+        });
+
+        showProductsButton.addEventListener('click', function () {
+            categoryList.style.display = 'none';
+            productList.style.display = 'block';
+        });
+    });
+</script>

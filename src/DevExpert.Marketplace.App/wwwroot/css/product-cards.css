@@ -47,16 +47,23 @@
 }
 
 .btn-load-more {
-    background-color: var(--accent-color);
-    border: none;
-    color: white;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--accent-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease;
     margin-top: 1rem;
 }
 
 .btn-load-more:hover {
-    background-color: var(--complementary-color);
+    color: var(--complementary-color);
+    background-color: #f0f0f0;
+    border: 1px solid var(--complementary-color);
 }
 
 .new-product-link {
