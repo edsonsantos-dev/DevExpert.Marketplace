@@ -48,8 +48,8 @@
 
             <!-- Botões para exibir Categorias ou Produtos -->
             <div class="d-flex justify-content-center mb-4">
-                <button class="btn btn-outline-success me-2" type="button" id="showCategories">Categorias</button>
-                <button class="btn btn-outline-secondary" type="button" id="showProducts">Produtos</button>
+                <button class="btn btn-toggle" type="button" id="showCategories">Categorias</button>
+                <button class="btn btn-toggle" type="button" id="showProducts">Produtos</button>
             </div>
 
             <!-- Lista de Categorias -->
@@ -125,22 +125,6 @@
 <partial name="_DeleteCategory"/>
 <partial name="_DeleteProduct"/>
 
-<!-- Script para alternar entre Categorias e Produtos -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const showCategoriesButton = document.getElementById('showCategories');
-        const showProductsButton = document.getElementById('showProducts');
-        const categoryList = document.getElementById('categoryList');
-        const productList = document.getElementById('productList');
-
-        showCategoriesButton.addEventListener('click', function () {
-            categoryList.style.display = 'block';
-            productList.style.display = 'none';
-        });
-
-        showProductsButton.addEventListener('click', function () {
-            categoryList.style.display = 'none';
-            productList.style.display = 'block';
-        });
-    });
-</script>
+@section Scripts {
+    <partial name="_ToggleScript"/>
+}

@@ -1,0 +1,28 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const showCategoriesButton = document.getElementById('showCategories');
+        const showProductsButton = document.getElementById('showProducts');
+        const categoryList = document.getElementById('categoryList');
+        const productList = document.getElementById('productList');
+
+        function toggleActiveButton(buttonToActivate, buttonToDeactivate) {
+            buttonToActivate.classList.add('active');
+            buttonToDeactivate.classList.remove('active');
+        }
+
+        showCategoriesButton.addEventListener('click', function () {
+            categoryList.style.display = 'block';
+            productList.style.display = 'none';
+            toggleActiveButton(showCategoriesButton, showProductsButton);
+        });
+
+        showProductsButton.addEventListener('click', function () {
+            categoryList.style.display = 'none';
+            productList.style.display = 'block';
+            toggleActiveButton(showProductsButton, showCategoriesButton);
+        });
+
+        // Inicia com a lista de Categorias visível por padrão
+        showCategoriesButton.click();
+    });
+</script>
