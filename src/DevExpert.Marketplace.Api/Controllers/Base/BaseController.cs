@@ -1,12 +1,14 @@
 using System.Net;
 using DevExpert.Marketplace.Business.Interfaces.Notifications;
 using DevExpert.Marketplace.Business.Notifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DevExpert.Marketplace.Api.Controllers.Base;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 public abstract class BaseController(INotifier notifier) : ControllerBase
 {
