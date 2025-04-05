@@ -52,7 +52,17 @@
 
             <!-- Lista de Categorias -->
             <div id="categoryList" class="mb-4" style="display: none;">
-                <h3>Categorias</h3>
+                
+                <div class="header-section">
+                    <h4>Categorias</h4>
+                    <div>
+                        <a class="new-category-link me-3" title="Nova Categoria" asp-controller="Category"
+                           asp-action="Create">
+                            <i class="bi bi-plus-circle"></i> Nova Categoria
+                        </a>
+                    </div>
+                </div>
+
                 <ul class="list-group">
                     @foreach (var category in categories)
                     {
@@ -64,7 +74,7 @@
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <button type="button" class="btn-icon-trash" title="Excluir" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal" data-category-id="@category.Id">
+                                        data-bs-target="#deleteCategory" data-category-id="@category.Id">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -75,7 +85,17 @@
 
             <!-- Lista de Produtos -->
             <div id="productList" style="display: none;">
-                <h3>Produtos</h3>
+
+                <div class="header-section">
+                    <h4>Produtos</h4>
+                    <div>
+                        <a class="new-category-link me-3" title="Novo Produto" asp-controller="Product"
+                           asp-action="Create">
+                            <i class="bi bi-plus-circle"></i> Novo Produto
+                        </a>
+                    </div>
+                </div>
+                
                 <ul class="list-group">
                     @foreach (var product in products)
                     {
@@ -88,7 +108,7 @@
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 <button type="button" class="btn-icon-trash" title="Excluir" data-bs-toggle="modal"
-                                        data-bs-target="#deleteModal" data-category-id="@product.Id">
+                                        data-bs-target="#deleteProduct" data-category-id="@product.Id">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </div>
@@ -100,8 +120,8 @@
     </div>
 </div>
 
-<partial name="_DeleteCategory" />
-<partial name="_DeleteProduct" />
+<partial name="_DeleteCategory"/>
+<partial name="_DeleteProduct"/>
 
 <!-- Script para alternar entre Categorias e Produtos -->
 <script>

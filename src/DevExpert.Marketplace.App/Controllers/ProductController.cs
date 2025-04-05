@@ -32,7 +32,7 @@ public class ProductController(
 
         var outputViewModel = await appService.AddAsync(inputViewModel);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
     
     [Route("detalhes-do-produto/{id:guid}")]

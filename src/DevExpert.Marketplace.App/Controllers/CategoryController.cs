@@ -30,7 +30,7 @@ public class CategoryController(ICategoryAppService appService) : Controller
 
         var outputViewModel = await appService.AddAsync(inputViewModel);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 
     [Route("editar-categoria/{id:guid}")]
@@ -57,7 +57,7 @@ public class CategoryController(ICategoryAppService appService) : Controller
 
         await appService.UpdateAsync(inputViewModel);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 
     [Route("excluir-categoria/{id:guid}")]
@@ -65,6 +65,6 @@ public class CategoryController(ICategoryAppService appService) : Controller
     public async Task<IActionResult> Delete(Guid id)
     {
         await appService.DeleteAsync(id);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 }

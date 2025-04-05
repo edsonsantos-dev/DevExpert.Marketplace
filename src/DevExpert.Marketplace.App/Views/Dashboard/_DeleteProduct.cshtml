@@ -1,5 +1,5 @@
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteProduct" tabindex="-1" aria-labelledby="deleteProductLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4">
             <div class="modal-body text-center">
@@ -38,8 +38,8 @@
 <!-- Script para passar o ID dinamicamente para o formulário -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var deleteModal = document.getElementById('deleteModal');
-        deleteModal.addEventListener('show.bs.modal', function (event) {
+        var deleteProduct = document.getElementById('deleteProduct');
+        deleteProduct.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
             var prodcutId = button.getAttribute('data-prodcut-id');
 
