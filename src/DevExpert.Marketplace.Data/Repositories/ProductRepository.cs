@@ -8,6 +8,14 @@ namespace DevExpert.Marketplace.Data.Repositories;
 public class ProductRepository(MarketplaceContext context)
     : Repository<Product>(context), IProductRepository
 {
+    public async Task<bool> ProductHasImageAsync(Guid id)
+    {
+        return await DbSet
+            .AsNoTracking()
+            .Include(x => x.Images)
+            .AnyAsync(x => x.Id == id && x.Images.Any());
+    }
+    
     public override async Task<Product?> GetByIdAsync(Guid id)
     {
         return await DbSet

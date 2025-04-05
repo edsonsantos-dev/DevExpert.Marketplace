@@ -15,7 +15,7 @@ public class ProductController(
         var products = await appService.GetAllAsync();
         return View(products.ToList());
     }
-    
+
     [Route("novo-produto")]
     public IActionResult Create()
     {
@@ -30,15 +30,46 @@ public class ProductController(
 
         inputViewModel.SellerId = userContext.GetUserId();
 
-        var outputViewModel = await appService.AddAsync(inputViewModel);
+        await appService.AddAsync(inputViewModel);
 
         return RedirectToAction("Index", "Dashboard");
     }
-    
+
     [Route("detalhes-do-produto/{id:guid}")]
     public async Task<IActionResult> Details(Guid id)
     {
         var product = await appService.GetByIdAsync(id);
         return View(product);
+    }
+
+    [Route("editar-produto/{id:guid}")]
+    public async Task<IActionResult> Edit(Guid id)
+    {
+        var product = await appService.GetByIdAsync(id);
+
+        if (product == null) return NotFound();
+
+        return View(product);
+    }
+
+    [Route("editar-produto/{id:guid}")]
+    [HttpPost]
+    public async Task<IActionResult> Edit(ProductInputViewModel inputViewModel)
+    {
+        var hasImage = await appService.ProductHasImageAsync(inputViewModel.Id.GetValueOrDefault());
+
+        if (hasImage)
+            ModelState.Remove("Images");
+
+        if (!ModelState.IsValid)
+        {
+            var product = await appService.GetByIdAsync(inputViewModel.Id.GetValueOrDefault());
+            return View(product);
+        }
+
+        inputViewModel.SellerId = userContext.GetUserId();
+        await appService.UpdateAsync(inputViewModel);
+
+        return RedirectToAction("Index", "Dashboard");
     }
 }

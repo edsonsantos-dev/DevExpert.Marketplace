@@ -1,0 +1,85 @@
+@model DevExpert.Marketplace.Application.ViewModels.OutputViewModels.ProductOutputViewModel
+
+@{
+    ViewData["Title"] = "Editar Produto";
+}
+
+<div class="container">
+    <h3 class="row justify-content-center">@ViewData["Title"]</h3>
+</div>
+
+<hr/>
+<!-- Formulário de Edição de Produto -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post" enctype="multipart/form-data" asp-action="Edit">
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label class="form-label">Nome do Produto</label>
+                    <input name="Name" class="form-control" value="@Model.Name" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Descrição</label>
+                    <textarea name="Description" class="form-control" rows="4">@Model.Description</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Preço</label>
+                    <input name="Price" class="form-control" value="@Model.Price" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Estoque</label>
+                    <input name="Stock" class="form-control" value="@Model.Stock" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Categoria</label>
+                    <select name="CategoryId" class="form-control">
+                        <option value="">Selecione uma categoria</option>
+                        @await Component.InvokeAsync("CategoryDropdown", new { selectedCategoryId = Model.Category?.Id })
+                    </select>
+                </div>
+
+
+
+                <!-- Upload de Múltiplas Imagens -->
+                <div class="mb-3">
+                    <label class="form-label">Imagens do Produto (Selecione várias)</label>
+                    <input name="Images" class="form-control" type="file" multiple />
+                </div>
+
+                <!-- Exibição de imagens já enviadas -->
+                <div class="mb-4">
+                    <h5>Imagens Existentes</h5>
+                    <div class="row">
+                        @if (Model.Images != null && Model.Images.Any())
+                        {
+                            foreach (var image in Model.Images)
+                            {
+                                <div class="col-4 mb-3">
+                                    <img src="~/@image.FilePath" class="img-fluid border rounded" alt="Imagem do Produto">
+                                    <div class="mt-2 text-center">
+                                        <button type="button" class="btn btn-danger btn-sm remove-image-btn" data-image-id="@image.Id">Excluir</button>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>Nenhuma imagem cadastrada para este produto.</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">Voltar</a>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

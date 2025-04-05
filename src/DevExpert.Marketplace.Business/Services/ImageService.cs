@@ -4,6 +4,4 @@ using DevExpert.Marketplace.Business.Models;
 
 namespace DevExpert.Marketplace.Business.Services;
 
-public class ImageService(IImageRepository repository, INotifier notifier) : Service<Image>(repository, notifier)
-{
-}
+public class ImageService(IImageRepository repository, INotifier notifier) : Service<Image>(repository, notifier);

@@ -15,6 +15,11 @@ public class ProductAppService(
     INotifier notifier)
     : AppService<Product, ProductInputViewModel, ProductOutputViewModel>(service), IProductAppService
 {
+    public async Task<bool> ProductHasImageAsync(Guid id)
+    {
+        return await service.ProductHasImageAsync(id);
+    }
+    
     public override async Task<ProductOutputViewModel> AddAsync(ProductInputViewModel inputViewModel)
     {
         var product = inputViewModel.ToModel();

@@ -2,5 +2,12 @@
 
 @foreach (var category in Model)
 {
-    <option value="@category.Id">@category.Name</option>
+    @if (ViewBag.SelectedCategoryId != null && ViewBag.SelectedCategoryId == category.Id)
+    {
+        <option value="@category.Id" selected="selected">@category.Name</option>
+    }
+    else
+    {
+        <option value="@category.Id">@category.Name</option>
+    }
 }

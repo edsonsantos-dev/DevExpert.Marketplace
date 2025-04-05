@@ -7,9 +7,30 @@ namespace DevExpert.Marketplace.Business.Services;
 
 public class ProductService(
     IProductRepository repository,
+    IImageRepository imageRepository,
     INotifier notifier)
     : Service<Product>(repository, notifier), IProductService
 {
+    public async Task<bool> ProductHasImageAsync(Guid id)
+    {
+        return await repository.ProductHasImageAsync(id);
+    }
+
+    public override async Task<Product> UpdateAsync(Product entity)
+    {
+        var hasImage = false;
+        if (entity.Images.Count == 0)
+            hasImage = await ProductHasImageAsync(entity.Id);
+
+        if (!hasImage) 
+            return await base.UpdateAsync(entity);
+        
+        var images = await imageRepository.GetImagesByProductIdAsync(entity.Id);
+        entity.Images.AddRange(images);
+
+        return await base.UpdateAsync(entity);
+    }
+
     public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
     {
         return await repository.GetProductsByCategoryIdAsync(categoryId);

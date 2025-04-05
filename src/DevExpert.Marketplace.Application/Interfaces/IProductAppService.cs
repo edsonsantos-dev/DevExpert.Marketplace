@@ -6,6 +6,7 @@ namespace DevExpert.Marketplace.Application.Interfaces;
 
 public interface IProductAppService : IAppService<Product, ProductInputViewModel, ProductOutputViewModel>
 {
+    Task<bool> ProductHasImageAsync(Guid id);
     Task<List<ProductOutputViewModel>> GetProductsByCategoryIdAsync(Guid categoryId);
     Task<List<ProductOutputViewModel>> GetProductsBySellerIdAsync(Guid sellerId);
 }

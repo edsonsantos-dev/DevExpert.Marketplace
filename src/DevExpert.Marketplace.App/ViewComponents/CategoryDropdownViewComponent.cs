@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.ViewComponents;
 
-public class CategoryDropdownViewComponent(ICategoryAppService appService) : ViewComponent
+public class CategoryDropdownViewComponent(ICategoryAppService categoryAppService) : ViewComponent
 {
-    public async Task<IViewComponentResult> InvokeAsync()
+    public async Task<IViewComponentResult> InvokeAsync(Guid? selectedCategoryId = null)
     {
-        var categories = await appService.GetAllAsync();
+        var categories = await categoryAppService.GetAllAsync();
+        
+        ViewBag.SelectedCategoryId = selectedCategoryId;
 
         return View(categories.ToList());
     }
