@@ -24,7 +24,7 @@ public static class ImageHelper
 
     public static void DeleteImage(Guid id)
     {
-        var directoryPath =Combine(id);
+        var directoryPath = Combine(id);
 
         if (!Directory.Exists(directoryPath))
             return;
@@ -34,9 +34,10 @@ public static class ImageHelper
 
     public static string Combine(Guid id, string name)
     {
+        string path;
         if (IsWebApi)
         {
-            return Path.Combine(
+            path = Path.Combine(
                 Settings.AppPath,
                 Settings.RootPath,
                 Settings.ProductImageDirectoryPath,
@@ -44,10 +45,12 @@ public static class ImageHelper
                 name);
         }
 
-        return Path.Combine(
+        path = Path.Combine(
             Settings.ProductImageDirectoryPath,
             id.ToString(),
             name);
+
+        return NormalizePathSeparators(path);
     }
 
     private static async Task SaveAsync(INotifier notifier, Image image, IFormFile imageFile)
@@ -73,7 +76,7 @@ public static class ImageHelper
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
 
-            var fullFilePath = Path.Combine(directoryPath, image.Name!);
+            var fullFilePath = NormalizePathSeparators(Path.Combine(directoryPath, image.Name!));
 
             await using var fileStream = new FileStream(fullFilePath, FileMode.Create);
             await imageFile.CopyToAsync(fileStream);
@@ -86,18 +89,28 @@ public static class ImageHelper
 
     private static string Combine(Guid id)
     {
+        string path;
+        
         if (IsWebApi)
         {
-            return Path.Combine(
+            path = Path.Combine(
                 Settings.AppPath,
                 Settings.RootPath,
                 Settings.ProductImageDirectoryPath,
                 id.ToString());
         }
 
-        return Path.Combine(
+        path = Path.Combine(
             Settings.RootPath,
             Settings.ProductImageDirectoryPath,
             id.ToString());
+
+        return NormalizePathSeparators(path);
+    }
+
+    private static string NormalizePathSeparators(string path)
+    {
+        path = path.Replace("\\", "/");
+        return path;
     }
 }

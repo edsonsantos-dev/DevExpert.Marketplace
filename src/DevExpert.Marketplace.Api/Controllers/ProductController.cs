@@ -13,9 +13,9 @@ public class ProductController(INotifier notifier, IProductAppService appService
     : GenericController<Product, ProductInputViewModel, ProductOutputViewModel>(notifier, appService)
 {
     [HttpGet("[action]")]
-    public async Task<IActionResult> GetProductsByCategoryIdAsync(Guid categoryId)
+    public async Task<IActionResult> GetProductsByCategoriesIdAsync(List<Guid> categoreisId)
     {
-        var products = await appService.GetProductsByCategoryIdAsync(categoryId);
+        var products = await appService.GetProductsByCategoriesIdAsync(categoreisId);
 
         return products.Count == 0
             ? CustomResponse(HttpStatusCode.NoContent)

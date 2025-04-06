@@ -31,9 +31,9 @@ public class ProductService(
         return await base.UpdateAsync(entity);
     }
 
-    public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
+    public async Task<List<Product>> GetProductsByCategoriesIdAsync(List<Guid> categoreisId)
     {
-        return await repository.GetProductsByCategoryIdAsync(categoryId);
+        return await repository.GetProductsByCategoriesIdAsync(categoreisId);
     }
 
     public async Task<List<Product>> GetProductsBySellerIdAsync(Guid sellerId)

@@ -26,14 +26,14 @@ public class ProductRepository(MarketplaceContext context)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
+    public async Task<List<Product>> GetProductsByCategoriesIdAsync(List<Guid> categoreisId)
     {
         return await DbSet
             .AsNoTracking()
             .Include(x => x.Category)
             .Include(x => x.Seller)
             .Include(x => x.Images)
-            .Where(x => x.CategoryId == categoryId)
+            .Where(x => categoreisId.Contains(x.CategoryId))
             .ToListAsync();
     }
 

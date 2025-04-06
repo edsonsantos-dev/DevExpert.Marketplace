@@ -29,9 +29,9 @@ public class ProductAppService(
         return new ProductOutputViewModel().FromModel(product);
     }
 
-    public async Task<List<ProductOutputViewModel>> GetProductsByCategoryIdAsync(Guid categoryId)
+    public async Task<List<ProductOutputViewModel>> GetProductsByCategoriesIdAsync(List<Guid> categoreisId)
     {
-        var products = await service.GetProductsByCategoryIdAsync(categoryId);
+        var products = await service.GetProductsByCategoriesIdAsync(categoreisId);
         return products.Select(p => new ProductOutputViewModel().FromModel(p)).ToList();
     }
 
