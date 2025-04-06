@@ -1,5 +1,6 @@
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
+using DevExpert.Marketplace.Application.ViewModels.OutputViewModels;
 using DevExpert.Marketplace.Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,15 @@ public class ProductController(
 {
     [AllowAnonymous]
     [Route("lista-de-produtos")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(List<Guid>? categories = null)
     {
-        var products = await appService.GetAllAsync();
+        IEnumerable<ProductOutputViewModel> products;
+        
+        if (categories == null || categories.Count == 0)
+            products = await appService.GetAllAsync();
+        else
+            products = await appService.GetProductsByCategoriesIdAsync(categories);
+        
         return View(products.ToList());
     }
 
