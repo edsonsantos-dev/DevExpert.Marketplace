@@ -26,7 +26,7 @@
                     <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-3" data-bs-dismiss="modal">
                         Cancelar
                     </button>
-                    <form id="deleteForm" method="post">
+                    <form id="deleteCategoryForm" method="post">
                         <button type="submit" class="btn btn-danger px-4 py-2 rounded-3">Sim, Excluir</button>
                     </form>
                 </div>
@@ -43,7 +43,7 @@
             var button = event.relatedTarget;
             var categoryId = button.getAttribute('data-category-id');
 
-            var form = document.getElementById('deleteForm');
+            var form = document.getElementById('deleteCategoryForm');
             form.setAttribute('action', `/excluir-categoria/${categoryId}`);
             form.setAttribute('method', 'post');
 
