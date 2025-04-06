@@ -9,7 +9,7 @@ public class SellerService(ISellerRepository repository, INotifier notifier)
 {
     public override Task DeleteAsync(Guid id)
     {
-        notifier.AddNotification(new("Seller can't be deleted."));
+        notifier.AddNotification(new("O vendedor não pode ser deletado."));
         return Task.CompletedTask;
     }
 }

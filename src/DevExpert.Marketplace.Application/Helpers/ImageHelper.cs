@@ -59,13 +59,13 @@ public static class ImageHelper
         {
             if (!imageFile.ContentType.StartsWith("image"))
             {
-                notifier.AddNotification(new("File is not an image."));
+                notifier.AddNotification(new("O arquivo não é uma imagem."));
                 return;
             }
 
             if (image.ProductId == Guid.Empty)
             {
-                notifier.AddNotification(new("Product Id is empty or null."));
+                notifier.AddNotification(new("O Id do produto está vazio ou nulo."));
                 return;
             }
 
@@ -83,7 +83,8 @@ public static class ImageHelper
         }
         catch (Exception ex)
         {
-            notifier.AddNotification(new($"Error saving image: {ex.Message}"));
+            notifier.AddNotification(new($"Erro ao salvar a imagem: {ex.Message}"));
+
         }
     }
 

@@ -12,10 +12,10 @@ public class Category : Entity
     public override void Validation(INotifier notifier)
     {
         if (string.IsNullOrEmpty(Name))
-            notifier.AddNotification(new($"Name is required."));
+            notifier.AddNotification(new($"Nome é obrigatório."));
 
         if (string.IsNullOrEmpty(Description))
-            notifier.AddNotification(new($"Description is required."));
+            notifier.AddNotification(new($"Descrição é obrigatória."));
     }
     
     public bool CanBeDeleted(INotifier notifier)
@@ -23,7 +23,7 @@ public class Category : Entity
         if (Products?.Count == 0)
             return true;
 
-        notifier.AddNotification(new($"Category can not be deleted because it has products."));
+        notifier.AddNotification(new($"Categoria não pode ser deletada porque possui produtos."));
         return false;
     }
 }

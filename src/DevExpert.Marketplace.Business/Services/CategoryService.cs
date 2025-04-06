@@ -14,7 +14,7 @@ public class CategoryService(
 
         if (category == null)
         {
-            notifier.AddNotification(new("Category not found."));
+            notifier.AddNotification(new("Categoria não encontrada."));
             return;
         }
 

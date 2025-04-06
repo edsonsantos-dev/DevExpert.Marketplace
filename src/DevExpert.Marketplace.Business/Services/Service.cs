@@ -51,7 +51,7 @@ public abstract class Service<TEntity>(
 
         if (entity == null)
         {
-            notifier.AddNotification(new($"{typeof(TEntity).Name} not found"));
+            notifier.AddNotification(new($"{typeof(TEntity).Name} não encontrado"));
             return;
         }
 

@@ -9,13 +9,13 @@ public class Seller : Entity
     public string? PhoneNumber { get; set; }
 
     public List<Product>? Products { get; set; }
-    
+
     public override void Validation(INotifier notifier)
     {
         if (string.IsNullOrEmpty(FullName))
-            notifier.AddNotification(new($"Full name is required."));
+            notifier.AddNotification(new($"Nome completo é obrigatório."));
 
         if (string.IsNullOrEmpty(Email))
-            notifier.AddNotification(new($"Email is required."));
+            notifier.AddNotification(new($"E-mail é obrigatório."));
     }
 }

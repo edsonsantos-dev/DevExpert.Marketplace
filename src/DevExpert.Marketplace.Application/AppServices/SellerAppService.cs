@@ -18,7 +18,7 @@ public class SellerAppService(
 
         if (!inputViewModel.Id.HasValue)
         {
-            notifier.AddNotification(new("Id is required"));
+            notifier.AddNotification(new("Id é obrigatório"));
             return null;
         }
         
