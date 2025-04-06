@@ -2,6 +2,7 @@ using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
 using DevExpert.Marketplace.Application.ViewModels.OutputViewModels;
 using DevExpert.Marketplace.Business.Interfaces;
+using DevExpert.Marketplace.Business.Interfaces.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,19 +11,20 @@ namespace DevExpert.Marketplace.App.Controllers;
 [Authorize]
 public class ProductController(
     IProductAppService appService,
-    IUserContext userContext) : Controller
+    IUserContext userContext,
+    INotifier notifier) : BaseController(notifier)
 {
     [AllowAnonymous]
     [Route("lista-de-produtos")]
     public async Task<IActionResult> Index(List<Guid>? categories = null)
     {
         IEnumerable<ProductOutputViewModel> products;
-        
+
         if (categories == null || categories.Count == 0)
             products = await appService.GetAllAsync();
         else
             products = await appService.GetProductsByCategoriesIdAsync(categories);
-        
+
         return View(products.ToList());
     }
 
@@ -41,6 +43,15 @@ public class ProductController(
         inputViewModel.SellerId = userContext.GetUserId();
 
         await appService.AddAsync(inputViewModel);
+
+        if (!IsValid())
+        {
+            TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
+
+            return View(inputViewModel);
+        }
+
+        TempData["Success"] = "Produto cadastrada com sucesso!";
 
         return RedirectToAction("Index", "Dashboard");
     }
@@ -72,14 +83,37 @@ public class ProductController(
         if (hasImage)
             ModelState.Remove("Images");
 
+        var product = await appService.GetByIdAsync(inputViewModel.Id.GetValueOrDefault());
         if (!ModelState.IsValid)
         {
-            var product = await appService.GetByIdAsync(inputViewModel.Id.GetValueOrDefault());
             return View(product);
         }
 
         inputViewModel.SellerId = userContext.GetUserId();
         await appService.UpdateAsync(inputViewModel);
+
+        if (!IsValid())
+        {
+            TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
+
+            return View(product);
+        }
+
+        TempData["Success"] = "Produto atualizado com sucesso!";
+
+        return RedirectToAction("Index", "Dashboard");
+    }
+
+    [Route("excluir-produto/{id:guid}")]
+    [HttpPost, ActionName("Delete")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await appService.DeleteAsync(id);
+        
+        if (!IsValid())
+            TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
+        else
+            TempData["Success"] = "Produto excluido com sucesso!";
 
         return RedirectToAction("Index", "Dashboard");
     }

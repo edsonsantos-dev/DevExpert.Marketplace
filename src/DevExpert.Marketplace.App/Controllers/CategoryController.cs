@@ -1,21 +1,14 @@
 using DevExpert.Marketplace.Application.Interfaces;
 using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
+using DevExpert.Marketplace.Business.Interfaces.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
 [Authorize]
-public class CategoryController(ICategoryAppService appService) : Controller
+public class CategoryController(ICategoryAppService appService, INotifier notifier) : BaseController(notifier)
 {
-    [Route("lista-de-categorias")]
-    public async Task<IActionResult> Index()
-    {
-        var categories = await appService.GetAllAsync();
-
-        return View(categories.ToList());
-    }
-
     [Route("nova-categoria")]
     public IActionResult Create()
     {
@@ -28,7 +21,16 @@ public class CategoryController(ICategoryAppService appService) : Controller
     {
         if (!ModelState.IsValid) return View(inputViewModel);
 
-        var outputViewModel = await appService.AddAsync(inputViewModel);
+        await appService.AddAsync(inputViewModel);
+
+        if (!IsValid())
+        {
+            TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
+
+            return View(inputViewModel);
+        }
+
+        TempData["Success"] = "Categoria cadastrada com sucesso!";
 
         return RedirectToAction("Index", "Dashboard");
     }
@@ -57,6 +59,15 @@ public class CategoryController(ICategoryAppService appService) : Controller
 
         await appService.UpdateAsync(inputViewModel);
 
+        if (!IsValid())
+        {
+            TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
+
+            return View(inputViewModel);
+        }
+
+        TempData["Success"] = "Categoria atualizada com sucesso!";
+
         return RedirectToAction("Index", "Dashboard");
     }
 
@@ -65,6 +76,12 @@ public class CategoryController(ICategoryAppService appService) : Controller
     public async Task<IActionResult> Delete(Guid id)
     {
         await appService.DeleteAsync(id);
+        
+        if (!IsValid())
+            TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
+        else
+            TempData["Success"] = "Categoria excluida com sucesso!";
+
         return RedirectToAction("Index", "Dashboard");
     }
 }

@@ -19,7 +19,7 @@ public class ProductAppService(
     {
         return await service.ProductHasImageAsync(id);
     }
-    
+
     public override async Task<ProductOutputViewModel> AddAsync(ProductInputViewModel inputViewModel)
     {
         var product = inputViewModel.ToModel();
@@ -44,6 +44,8 @@ public class ProductAppService(
     public override async Task DeleteAsync(Guid id)
     {
         await service.DeleteAsync(id);
+        if (notifier.HaveNotification())
+            return;
         ImageHelper.DeleteImage(id);
     }
 }

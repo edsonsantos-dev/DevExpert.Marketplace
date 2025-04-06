@@ -16,7 +16,6 @@
                     <i class="bi bi-trash" style="font-size: 2.5rem; color: #E74C3C;"></i>
                 </div>
 
-
                 <!-- Mensagem Principal -->
                 <h5 class="fw-bold">Tem certeza que deseja excluir este produto?</h5>
                 <p class="text-muted">Este produto será excluída permanentemente.</p>
@@ -41,11 +40,15 @@
         var deleteProduct = document.getElementById('deleteProduct');
         deleteProduct.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget;
-            var prodcutId = button.getAttribute('data-prodcut-id');
+            var productId = button.getAttribute('data-product-id');
 
             var form = document.getElementById('deleteForm');
-            form.setAttribute('action', `/excluir-produto/${prodcutId}`);
+            form.setAttribute('action', `/excluir-produto/${productId}`);
             form.setAttribute('method', 'post');
+            
+            @{
+                Console.WriteLine("passei aqui");
+            }
 
             var methodInput = document.createElement('input');
             methodInput.setAttribute('type', 'hidden');
