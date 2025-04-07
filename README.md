@@ -95,42 +95,18 @@ dotnet run
 ```
 Acesse a documentação da API em: http://localhost:5001/swagger
 
-## 7. Instruções de Configuração e Execução por Ambiente
-
-### Ambiente de Desenvolvimento
-Para rodar a aplicação em ambiente de desenvolvimento (usualmente com banco de dados SQLite):
-
-```bash
-ASPNETCORE_ENVIRONMENT=Development dotnet run
-```
-Ou utilizando um perfil de lançamento:
-```bash
-dotnet run --launch-profile "Development"
-```
-
-### Ambiente de Produção
-Para rodar a aplicação em ambiente de produção (usualmente com banco de dados SQL Server):
-
-```bash
-ASPNETCORE_ENVIRONMENT=Production dotnet run
-```
-Ou utilizando um perfil de lançamento:
-```bash
-dotnet run --launch-profile "Production"
-```
-
 ### Detalhes de Configuração
 - **JWT para API:** As chaves de configuração do JWT estão no `appsettings.json`.
 - **Migrações do Banco de Dados:** As migrações são gerenciadas pelo Entity Framework Core. Não é necessário aplicar devido à configuração do Seed de dados.
 
-## 8. Documentação da API
+## 7. Documentação da API
 
 A documentação da API está disponível através do Swagger. Após iniciar a API, acesse a documentação em:
 ```
 http://localhost:5001/swagger
 ```
 
-## 9. Avaliação
+## 8. Avaliação
 
 - Este projeto é parte de um curso acadêmico e não aceita contribuições externas.
 - Para feedbacks ou dúvidas utilize o recurso de Issues.
