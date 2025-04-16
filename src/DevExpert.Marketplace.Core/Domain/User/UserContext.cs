@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace DevExpert.Marketplace.Core.Helpers;
+namespace DevExpert.Marketplace.Core.Domain.User;
 
 public class UserContext(IHttpContextAccessor accessor) : IUserContext
 {

@@ -4,6 +4,7 @@ using DevExpert.Marketplace.Core.Domain.Categories;
 using DevExpert.Marketplace.Core.Domain.Images;
 using DevExpert.Marketplace.Core.Domain.Products;
 using DevExpert.Marketplace.Core.Domain.Sellers;
+using DevExpert.Marketplace.Core.Domain.User;
 using DevExpert.Marketplace.Core.Helpers;
 using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Builder;

@@ -1,4 +1,5 @@
 using DevExpert.Marketplace.Core.Domain.Images;
+using DevExpert.Marketplace.Core.Domain.User;
 using DevExpert.Marketplace.Core.Helpers;
 using DevExpert.Marketplace.Core.Notifications;
 
@@ -35,6 +36,12 @@ public class ProductService(
     public async Task<bool> ProductHasImageAsync(Guid id)
     {
         return await repository.ProductHasImageAsync(id);
+    }
+
+    public async Task<List<ProductOutputViewModel>> GetAllAsync()
+    {
+        var products = await repository.GetAllAsync();
+        return products.Select(ProductOutputViewModel.FromModel).ToList();
     }
 
     public async Task<List<ProductOutputViewModel>> GetProductsByCategoriesIdAsync(List<Guid> categoriesId)

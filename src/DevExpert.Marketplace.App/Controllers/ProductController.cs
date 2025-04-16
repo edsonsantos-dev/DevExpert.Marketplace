@@ -1,4 +1,5 @@
 using DevExpert.Marketplace.Core.Domain.Products;
+using DevExpert.Marketplace.Core.Domain.User;
 using DevExpert.Marketplace.Core.Helpers;
 using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Authorization;

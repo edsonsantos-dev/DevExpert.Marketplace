@@ -1,3 +1,4 @@
+using DevExpert.Marketplace.Core.Domain.User;
 using DevExpert.Marketplace.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;

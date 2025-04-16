@@ -2,6 +2,7 @@ using DevExpert.Marketplace.Core.Domain.Categories;
 using DevExpert.Marketplace.Core.Domain.Images;
 using DevExpert.Marketplace.Core.Domain.Products;
 using DevExpert.Marketplace.Core.Domain.Sellers;
+using DevExpert.Marketplace.Core.Domain.User;
 using DevExpert.Marketplace.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

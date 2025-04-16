@@ -1,4 +1,4 @@
-namespace DevExpert.Marketplace.Core.Helpers;
+namespace DevExpert.Marketplace.Core.Domain.User;
 
 public interface IUserContext
 {

@@ -24,6 +24,12 @@ public class CategoryService(ICategoryRepository repository, INotifier notifier)
         return CategoryOutputViewModel.FromModel(category);
     }
 
+    public async Task<List<CategoryOutputViewModel>> GetAllAsync()
+    {
+        var categories = await repository.GetAllAsync();
+        return categories.Select(CategoryOutputViewModel.FromModel).ToList();
+    }
+
     public async Task<CategoryOutputViewModel> UpdateAsync(CategoryInputViewModel inputViewModel)
     {
         var category = inputViewModel.ToModel();
