@@ -1,8 +1,9 @@
 using System.Text;
-using DevExpert.Marketplace.Application.Helpers;
-using DevExpert.Marketplace.Data.Context;
-using DevExpert.Marketplace.IoC;
-using DevExpert.Marketplace.Shared.Extensions;
+using DevExpert.Marketplace.Core.Configurations;
+using DevExpert.Marketplace.Core.Data.Context;
+using DevExpert.Marketplace.Core.Data.Extensions;
+using DevExpert.Marketplace.Core.Domain.Images;
+using DevExpert.Marketplace.Core.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -22,7 +23,7 @@ app.Run();
 void ConfigureServices(WebApplicationBuilder builder)
 {
     builder.RegisterDatabaseServices();
-    builder.RegisterIoC();
+    builder.RegisterDependency();
     builder.LoadSettings();
 
     builder.Services.AddHttpContextAccessor();
@@ -91,7 +92,7 @@ void ConfigureServices(WebApplicationBuilder builder)
 
     builder.Services.AddAuthorization();
 
-    ImageHelper.IsWebApi = true;
+    ImageService.IsWebApi = true;
 }
 
 void ConfigureMiddleware(WebApplication app)

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DevExpert.Marketplace.Core.Domain.Images;
 
-public static class ImageService
+public class ImageService
 {
     public static bool IsWebApi;
     private static Settings Settings => Settings.Instance!;
@@ -85,14 +85,13 @@ public static class ImageService
         catch (Exception ex)
         {
             notifier.AddNotification(new($"Erro ao salvar a imagem: {ex.Message}"));
-
         }
     }
 
     private static string Combine(Guid id)
     {
         string path;
-        
+
         if (IsWebApi)
         {
             path = Path.Combine(

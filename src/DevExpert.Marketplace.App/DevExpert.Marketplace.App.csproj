@@ -17,13 +17,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DevExpert.Marketplace.Data\DevExpert.Marketplace.Data.csproj" />
-        <ProjectReference Include="..\DevExpert.Marketplace.IoC\DevExpert.Marketplace.IoC.csproj" />
-        <ProjectReference Include="..\DevExpert.Marketplace.Shared\DevExpert.Marketplace.Shared.csproj" />
+      <Folder Include="wwwroot\images\products\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\images\products\" />
+      <ProjectReference Include="..\DevExpert.Marketplace.Core\DevExpert.Marketplace.Core.csproj" />
     </ItemGroup>
 
 </Project>

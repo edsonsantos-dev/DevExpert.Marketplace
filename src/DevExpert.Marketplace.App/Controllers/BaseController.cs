@@ -1,4 +1,4 @@
-using DevExpert.Marketplace.Business.Interfaces.Notifications;
+using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;

@@ -1,10 +1,9 @@
-using DevExpert.Marketplace.Application.Interfaces;
-using DevExpert.Marketplace.Application.ViewModels.OutputViewModels;
+using DevExpert.Marketplace.Core.Domain.Categories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.ViewComponents;
 
-public class CategoryDropdownViewComponent(ICategoryAppService categoryAppService) : ViewComponent
+public class CategoryDropdownViewComponent(ICategoryService categoryAppService) : ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync(Guid? selectedCategoryId = null)
     {

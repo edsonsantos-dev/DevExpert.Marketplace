@@ -1,13 +1,12 @@
-using DevExpert.Marketplace.Application.Interfaces;
-using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
-using DevExpert.Marketplace.Business.Interfaces.Notifications;
+using DevExpert.Marketplace.Core.Domain.Categories;
+using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.Controllers;
 
 [Authorize]
-public class CategoryController(ICategoryAppService appService, INotifier notifier) : BaseController(notifier)
+public class CategoryController(ICategoryService appService, INotifier notifier) : BaseController(notifier)
 {
     [Route("nova-categoria")]
     public IActionResult Create()
@@ -38,7 +37,7 @@ public class CategoryController(ICategoryAppService appService, INotifier notifi
     [Route("editar-categoria/{id:guid}")]
     public async Task<IActionResult> Edit(Guid id)
     {
-        var category = await appService.GetByIdAsync(id);
+        var category = await appService.GetAsync(id);
 
         if (category == null) return NotFound();
 

@@ -1,5 +1,5 @@
-using DevExpert.Marketplace.Application.Interfaces;
-using DevExpert.Marketplace.Business.Interfaces;
+using DevExpert.Marketplace.Core.Domain.Categories;
+using DevExpert.Marketplace.Core.Domain.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,16 +7,15 @@ namespace DevExpert.Marketplace.App.Controllers;
 
 [Authorize]
 public class DashboardController(
-    ICategoryAppService categoryService,
-    IProductAppService productService,
-    IUserContext userContext)
+    ICategoryService categoryService,
+    IProductService productService)
     : Controller
 {
     [Route("dashboard")]
     public async Task<IActionResult> Index()
     {
         var categories = await categoryService.GetAllAsync();
-        var products = await productService.GetProductsBySellerIdAsync(userContext.GetUserId());
+        var products = await productService.GetProductsBySellerIdAsync();
 
         var model = Tuple.Create(categories.ToList(), products.ToList());
 

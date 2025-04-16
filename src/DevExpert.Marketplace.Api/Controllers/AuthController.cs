@@ -1,10 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using DevExpert.Marketplace.Api.Controllers.Base;
-using DevExpert.Marketplace.Application.Helpers;
-using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
-using DevExpert.Marketplace.Business.Interfaces.Notifications;
+using DevExpert.Marketplace.Core.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;

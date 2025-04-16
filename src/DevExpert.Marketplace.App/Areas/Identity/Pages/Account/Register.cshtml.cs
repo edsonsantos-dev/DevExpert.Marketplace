@@ -3,24 +3,16 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
-using DevExpert.Marketplace.Application.Interfaces;
-using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
+using DevExpert.Marketplace.Core.Domain.Sellers;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
 
 namespace DevExpert.Marketplace.App.Areas.Identity.Pages.Account
 {
@@ -32,7 +24,7 @@ namespace DevExpert.Marketplace.App.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly ISellerAppService _sellerAppService;
+        private readonly ISellerService _sellerService;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -40,7 +32,7 @@ namespace DevExpert.Marketplace.App.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ISellerAppService sellerAppService)
+            ISellerService sellerService)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -48,7 +40,7 @@ namespace DevExpert.Marketplace.App.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _sellerAppService = sellerAppService;
+            _sellerService = sellerService;
         }
 
         /// <summary>
@@ -129,7 +121,7 @@ namespace DevExpert.Marketplace.App.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _sellerAppService.AddAsync(new SellerInputViewModel
+                    await _sellerService.AddAsync(new SellerInputViewModel
                     {
                         Id = Guid.Parse(user.Id),
                         Email = user.Email,

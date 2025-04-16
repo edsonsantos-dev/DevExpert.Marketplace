@@ -1,8 +1,6 @@
-using DevExpert.Marketplace.Application.Interfaces;
-using DevExpert.Marketplace.Application.ViewModels.InputViewModels;
-using DevExpert.Marketplace.Application.ViewModels.OutputViewModels;
-using DevExpert.Marketplace.Business.Interfaces;
-using DevExpert.Marketplace.Business.Interfaces.Notifications;
+using DevExpert.Marketplace.Core.Domain.Products;
+using DevExpert.Marketplace.Core.Helpers;
+using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +8,7 @@ namespace DevExpert.Marketplace.App.Controllers;
 
 [Authorize]
 public class ProductController(
-    IProductAppService appService,
+    IProductService appService,
     IUserContext userContext,
     INotifier notifier) : BaseController(notifier)
 {
@@ -60,14 +58,14 @@ public class ProductController(
     [Route("detalhes-do-produto/{id:guid}")]
     public async Task<IActionResult> Details(Guid id)
     {
-        var product = await appService.GetByIdAsync(id);
+        var product = await appService.GetAsync(id);
         return View(product);
     }
 
     [Route("editar-produto/{id:guid}")]
     public async Task<IActionResult> Edit(Guid id)
     {
-        var product = await appService.GetByIdAsync(id);
+        var product = await appService.GetAsync(id);
 
         if (product == null) return NotFound();
 
@@ -83,7 +81,7 @@ public class ProductController(
         if (hasImage)
             ModelState.Remove("Images");
 
-        var product = await appService.GetByIdAsync(inputViewModel.Id.GetValueOrDefault());
+        var product = await appService.GetAsync(inputViewModel.Id.GetValueOrDefault());
         if (!ModelState.IsValid)
         {
             return View(product);

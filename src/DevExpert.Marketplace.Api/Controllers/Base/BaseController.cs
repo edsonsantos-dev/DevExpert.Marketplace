@@ -1,6 +1,5 @@
 using System.Net;
-using DevExpert.Marketplace.Business.Interfaces.Notifications;
-using DevExpert.Marketplace.Business.Notifications;
+using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

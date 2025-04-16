@@ -1,13 +1,14 @@
-using DevExpert.Marketplace.Application.Helpers;
-using DevExpert.Marketplace.Data.Context;
-using DevExpert.Marketplace.IoC;
-using DevExpert.Marketplace.Shared.Extensions;
+using DevExpert.Marketplace.Core.Configurations;
+using DevExpert.Marketplace.Core.Data.Context;
+using DevExpert.Marketplace.Core.Data.Extensions;
+using DevExpert.Marketplace.Core.Domain.Images;
+using DevExpert.Marketplace.Core.Helpers;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.RegisterDatabaseServices();
-builder.RegisterIoC();
+builder.RegisterDependency();
 builder.LoadSettings();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -16,7 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<IdentityContext>();
 builder.Services.AddControllersWithViews();
 
-ImageHelper.IsWebApi = false;
+ImageService.IsWebApi = false;
 
 var app = builder.Build();
 

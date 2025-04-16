@@ -1,9 +1,9 @@
-using DevExpert.Marketplace.Application.Interfaces;
+using DevExpert.Marketplace.Core.Domain.Categories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevExpert.Marketplace.App.ViewComponents;
 
-public class CategoryFilterViewComponent(ICategoryAppService appService) : ViewComponent
+public class CategoryFilterViewComponent(ICategoryService appService) : ViewComponent
 {
     public async Task<IViewComponentResult> InvokeAsync()
     {
