@@ -12,13 +12,14 @@
 <!-- Formulário de Edição de Produto -->
 <div class="container mt-4">
     <div class="row justify-content-center">
+        <partial name="_TempDataAlerts"/>
         <div class="col-md-8">
             <form method="post" enctype="multipart/form-data" asp-action="Edit">
-                <input type="hidden" name="Id" value="@Model.Id" />
+                <input type="hidden" name="Id" value="@Model.Id"/>
 
                 <div class="mb-3">
                     <label class="form-label">Nome do Produto</label>
-                    <input name="Name" class="form-control" value="@Model.Name" />
+                    <input name="Name" class="form-control" value="@Model.Name"/>
                 </div>
 
                 <div class="mb-3">
@@ -28,12 +29,12 @@
 
                 <div class="mb-3">
                     <label class="form-label">Preço</label>
-                    <input name="Price" class="form-control" value="@Model.Price" />
+                    <input name="Price" class="form-control" value="@Model.Price"/>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Estoque</label>
-                    <input name="Stock" class="form-control" value="@Model.Stock" />
+                    <input name="Stock" class="form-control" value="@Model.Stock"/>
                 </div>
 
                 <div class="mb-3">
@@ -49,7 +50,7 @@
                 <!-- Upload de Múltiplas Imagens -->
                 <div class="mb-3">
                     <label class="form-label">Imagens do Produto (Selecione várias)</label>
-                    <input name="Images" class="form-control" type="file" multiple />
+                    <input name="Images" class="form-control" type="file" multiple/>
                 </div>
 
                 <!-- Exibição de imagens já enviadas -->

@@ -20,7 +20,7 @@ public class ImageOutputViewModel : OutputViewModelBase
             IsCover = model.IsCover,
             FilePath = ImageService.Combine(
                 model.ProductId.GetValueOrDefault(),
-                model.Name!),
+                model.Name),
             AddedBy = model.AddedBy,
             AddedOn = model.AddedOn,
             ModifiedBy = model.ModifiedBy,

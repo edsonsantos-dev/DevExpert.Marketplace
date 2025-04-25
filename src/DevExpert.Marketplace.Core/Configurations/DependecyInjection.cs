@@ -41,6 +41,7 @@ public static class DependecyInjection
     private static void RegisterServices(IServiceCollection service)
     {
         service.AddScoped<ICategoryService, CategoryService>();
+        service.AddScoped<IImageService, ImageService>();
         service.AddScoped<IProductService, ProductService>();
         service.AddScoped<ISellerService, SellerService>();
     }

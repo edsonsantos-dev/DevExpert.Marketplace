@@ -5,19 +5,47 @@ using Microsoft.AspNetCore.Http;
 
 namespace DevExpert.Marketplace.Core.Domain.Images;
 
-public class ImageService
+public class ImageService(
+    IImageRepository repository,
+    IProductRepository productRepository,
+    INotifier notifier) : IImageService
 {
     public static bool IsWebApi;
     private static Settings Settings => Settings.Instance!;
+
+    public async Task AddProductImageAsync(Guid productId, IFormFile imageFile)
+    {
+        var product = await productRepository.GetByIdAsync(productId);
+
+        if (product == null)
+        {
+            notifier.AddNotification(new Notification("Produto não encontrado."));
+            return;
+        }
+
+        var image = new Image
+        {
+            DisplayPosition = product.Images.Count + 1,
+            ProductId = productId
+        };
+
+        await repository.AddAsync(image);
+        await repository.SaveChangesAsync();
+        
+        await SaveAsync(notifier, image, imageFile);
+    }
 
     public static async Task CreateImageAsync(Product product, List<IFormFile> imagesFile, INotifier notifier)
     {
         var count = 1;
         foreach (var imageFile in imagesFile)
         {
-            var image = new Image();
-            image.DisplayPosition = count++;
-            image.ProductId = product.Id;
+            var image = new Image
+            {
+                DisplayPosition = count++,
+                ProductId = product.Id
+            };
+            
             await SaveAsync(notifier, image, imageFile);
             product.Images.Add(image);
         }
@@ -33,8 +61,11 @@ public class ImageService
         Directory.Delete(directoryPath, true);
     }
 
-    public static string Combine(Guid id, string name)
+    public static string Combine(Guid id, string? name)
     {
+        if (id == Guid.Empty || string.IsNullOrEmpty(name))
+            return string.Empty;
+        
         string path;
         if (IsWebApi)
         {
@@ -90,8 +121,10 @@ public class ImageService
 
     private static string Combine(Guid id)
     {
+        if (id == Guid.Empty)
+            return string.Empty;
+        
         string path;
-
         if (IsWebApi)
         {
             path = Path.Combine(
