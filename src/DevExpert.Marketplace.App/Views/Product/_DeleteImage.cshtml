@@ -40,7 +40,7 @@
             const imageId = button.getAttribute('data-image-id');
 
             const form = document.getElementById('deleteImageForm');
-            form.setAttribute('action', `/produto/excluir-imagem/${imageId}`);
+            form.setAttribute('action', `/excluir-imagem/${imageId}`);
             form.setAttribute('method', 'post');
 
             // Remove entradas antigas
@@ -50,7 +50,7 @@
             const methodInput = document.createElement('input');
             methodInput.setAttribute('type', 'hidden');
             methodInput.setAttribute('name', '_method');
-            methodInput.setAttribute('value', 'DELETE');
+            methodInput.setAttribute('value', 'Delete');
 
             form.appendChild(methodInput);
         });

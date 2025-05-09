@@ -29,7 +29,7 @@ public class ImageService(
             notifier.AddNotification(new Notification("A exclusão da imagem está restrita ao vendedor de origem."));
             return;
         }
-        
+
         var images = await repository.GetImagesByProductIdAsync(image.ProductId.GetValueOrDefault());
 
         if (images.Count == 1)
@@ -37,16 +37,16 @@ public class ImageService(
             notifier.AddNotification(new Notification("Primeiro, insira uma nova imagem."));
             return;
         }
-        
+
         await repository.DeleteAsync(image);
         await repository.SaveChangesAsync();
-        
-        DeleteImage(image.ProductId.GetValueOrDefault(), image.Name);;
-        
+
+        DeleteImage(image.ProductId.GetValueOrDefault(), image.Name);
+
         images.Remove(image);
         await ReorderProductImagesDisplayPositionAsync(images);
     }
-    
+
     public async Task ReorderProductImagesDisplayPositionAsync(List<Image> images)
     {
         var count = 1;
@@ -79,10 +79,11 @@ public class ImageService(
     {
         var directoryPath = name == null ? Combine(productId) : Combine(productId, name);
 
-        if (!Directory.Exists(directoryPath))
-            return;
+        if (Directory.Exists(directoryPath))
+            Directory.Delete(directoryPath, true);
 
-        Directory.Delete(directoryPath, true);
+        if (File.Exists(directoryPath))
+            File.Delete(directoryPath);
     }
 
     public static string Combine(Guid id, string? name)
