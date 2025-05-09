@@ -4,5 +4,5 @@ namespace DevExpert.Marketplace.Core.Domain.Images;
 
 public interface IImageService
 {
-    Task AddProductImageAsync(Guid productId, IFormFile imageFile);
+    Task ReorderProductImagesDisplayPositionAsync(List<Image> images);
 }

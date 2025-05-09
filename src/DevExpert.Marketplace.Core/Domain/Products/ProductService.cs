@@ -1,11 +1,11 @@
 using DevExpert.Marketplace.Core.Domain.Images;
 using DevExpert.Marketplace.Core.Domain.User;
-using DevExpert.Marketplace.Core.Helpers;
 using DevExpert.Marketplace.Core.Notifications;
 
 namespace DevExpert.Marketplace.Core.Domain.Products;
 
 public class ProductService(
+    ImageService imageService,
     IProductRepository repository,
     IImageRepository imageRepository,
     IUserContext userContext,
@@ -80,6 +80,8 @@ public class ProductService(
         product = await repository.UpdateAsync(product);
         await repository.SaveChangesAsync();
 
+        await imageService.ReorderProductImagesDisplayPositionAsync(product.Images);
+
         return ProductOutputViewModel.FromModel(product);
     }
 
@@ -92,7 +94,7 @@ public class ProductService(
             notifier.AddNotification(new Notification("Produto não encontrado."));
             return;
         }
-        
+
         if (product.SellerId != userContext.GetUserId())
         {
             notifier.AddNotification(new Notification("A exclusão do produto está restrita ao vendedor de origem."));

@@ -1,5 +1,6 @@
 using DevExpert.Marketplace.Core.Configurations;
 using DevExpert.Marketplace.Core.Domain.Products;
+using DevExpert.Marketplace.Core.Domain.User;
 using DevExpert.Marketplace.Core.Notifications;
 using Microsoft.AspNetCore.Http;
 
@@ -7,32 +8,47 @@ namespace DevExpert.Marketplace.Core.Domain.Images;
 
 public class ImageService(
     IImageRepository repository,
-    IProductRepository productRepository,
+    IUserContext userContext,
     INotifier notifier) : IImageService
 {
     public static bool IsWebApi;
     private static Settings Settings => Settings.Instance!;
 
-    public async Task AddProductImageAsync(Guid productId, IFormFile imageFile)
+    public async Task DeleteAsync(Guid id)
     {
-        var product = await productRepository.GetByIdAsync(productId);
+        var image = await repository.GetByIdAsync(id);
 
-        if (product == null)
+        if (image == null)
         {
-            notifier.AddNotification(new Notification("Produto não encontrado."));
+            notifier.AddNotification(new Notification("Imagem não encontrada."));
             return;
         }
 
-        var image = new Image
+        if (image.AddedBy != userContext.GetUserId())
         {
-            DisplayPosition = product.Images.Count + 1,
-            ProductId = productId
-        };
-
-        await repository.AddAsync(image);
+            notifier.AddNotification(new Notification("A exclusão da imagem está restrita ao vendedor de origem."));
+            return;
+        }
+        
+        await repository.DeleteAsync(image);
         await repository.SaveChangesAsync();
         
-        await SaveAsync(notifier, image, imageFile);
+        DeleteImage(image.ProductId.GetValueOrDefault(), image.Name);;
+        
+        var images = await repository.GetImagesByProductIdAsync(image.ProductId.GetValueOrDefault());
+        await ReorderProductImagesDisplayPositionAsync(images);
+    }
+    
+    public async Task ReorderProductImagesDisplayPositionAsync(List<Image> images)
+    {
+        var count = 1;
+        foreach (var image in images.OrderBy(x => x.DisplayPosition))
+        {
+            image.DisplayPosition = count++;
+            await repository.UpdateAsync(image);
+        }
+
+        await repository.SaveChangesAsync();
     }
 
     public static async Task CreateImageAsync(Product product, List<IFormFile> imagesFile, INotifier notifier)
@@ -45,15 +61,15 @@ public class ImageService(
                 DisplayPosition = count++,
                 ProductId = product.Id
             };
-            
+
             await SaveAsync(notifier, image, imageFile);
             product.Images.Add(image);
         }
     }
 
-    public static void DeleteImage(Guid id)
+    public static void DeleteImage(Guid productId, string? name = null)
     {
-        var directoryPath = Combine(id);
+        var directoryPath = name == null ? Combine(productId) : Combine(productId, name);
 
         if (!Directory.Exists(directoryPath))
             return;
@@ -65,7 +81,7 @@ public class ImageService(
     {
         if (id == Guid.Empty || string.IsNullOrEmpty(name))
             return string.Empty;
-        
+
         string path;
         if (IsWebApi)
         {
@@ -123,7 +139,7 @@ public class ImageService(
     {
         if (id == Guid.Empty)
             return string.Empty;
-        
+
         string path;
         if (IsWebApi)
         {
