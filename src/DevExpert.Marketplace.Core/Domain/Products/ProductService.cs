@@ -102,8 +102,8 @@ public class ProductService(
         }
 
         await repository.DeleteAsync(product);
-        await imageRepository.DeleteRangeByProductIdAsync(id);
         await repository.SaveChangesAsync();
+        await imageRepository.DeleteRangeByProductIdAsync(id);
 
         ImageService.DeleteImage(id);
     }
