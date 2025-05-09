@@ -43,7 +43,9 @@ public class ImageService(
 
         DeleteImage(image.ProductId.GetValueOrDefault(), image.Name);
 
-        images.Remove(image);
+        var imageToRemove = images.FirstOrDefault(x => x.Id == image.Id);
+
+        images.Remove(imageToRemove!);
         await ReorderProductImagesDisplayPositionAsync(images);
     }
 

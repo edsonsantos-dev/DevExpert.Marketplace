@@ -109,7 +109,7 @@ public class ProductController(
     public async Task<IActionResult> Delete(Guid id)
     {
         await service.DeleteAsync(id);
-        
+
         if (!IsValid())
             TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
         else
@@ -117,21 +117,18 @@ public class ProductController(
 
         return RedirectToAction("Index", "Dashboard");
     }
-    
+
     [Route("excluir-imagem/{id:guid}")]
     [HttpPost, ActionName("Delete")]
-    public async Task<IActionResult> DeleteImage(Guid id)
+    public async Task<IActionResult> DeleteImage(Guid id, string returnUrl)
     {
         await imageService.DeleteAsync(id);
 
         if (!IsValid())
-        {
             TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
-            return BadRequest();
-        }
+        else
+            TempData["Success"] = "Imagem excluida com sucesso!";
 
-        TempData["Success"] = "Imagem excluida com sucesso!";
-
-        return Ok();
+        return Redirect(returnUrl);
     }
 }
