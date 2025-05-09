@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DevExpert.Marketplace.App.Controllers;
 
 [Authorize]
-public class CategoryController(ICategoryService appService, INotifier notifier) : BaseController(notifier)
+public class CategoryController(ICategoryService service, INotifier notifier) : BaseController(notifier)
 {
     [Route("nova-categoria")]
     public IActionResult Create()
@@ -20,7 +20,7 @@ public class CategoryController(ICategoryService appService, INotifier notifier)
     {
         if (!ModelState.IsValid) return View(inputViewModel);
 
-        await appService.AddAsync(inputViewModel);
+        await service.AddAsync(inputViewModel);
 
         if (!IsValid())
         {
@@ -37,7 +37,7 @@ public class CategoryController(ICategoryService appService, INotifier notifier)
     [Route("editar-categoria/{id:guid}")]
     public async Task<IActionResult> Edit(Guid id)
     {
-        var category = await appService.GetAsync(id);
+        var category = await service.GetAsync(id);
 
         if (category == null) return NotFound();
 
@@ -56,7 +56,7 @@ public class CategoryController(ICategoryService appService, INotifier notifier)
         if (id != inputViewModel.Id) return NotFound();
         if (!ModelState.IsValid) return View(inputViewModel);
 
-        await appService.UpdateAsync(inputViewModel);
+        await service.UpdateAsync(inputViewModel);
 
         if (!IsValid())
         {
@@ -74,7 +74,7 @@ public class CategoryController(ICategoryService appService, INotifier notifier)
     [HttpPost, ActionName("Delete")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await appService.DeleteAsync(id);
+        await service.DeleteAsync(id);
         
         if (!IsValid())
             TempData["Error"] = notifier.GetNotifications().Select(x => x.Message).FirstOrDefault();
