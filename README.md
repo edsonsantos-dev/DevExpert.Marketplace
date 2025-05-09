@@ -44,11 +44,7 @@ DevExpert.Marketplace/
 ├── src/
 │   ├── DevExpert.Marketplace.Api - API RESTful
 │   ├── DevExpert.Marketplace.App - Aplicação Principal
-│   ├── DevExpert.Marketplace.Application - Camada de Aplicação
-│   ├── DevExpert.Marketplace.Business - Regras de Negócio
-│   ├── DevExpert.Marketplace.Data - Modelos de Dados e Configuração do EF Core
-│   ├── DevExpert.Marketplace.IoC - Injeção de Dependências
-│   ├── DevExpert.Marketplace.Shared - Recursos Compartilhados
+│   ├── DevExpert.Marketplace.Core - Camada de Domínio e Regras de Negócio
 │
 ├── README.md - Arquivo de Documentação do Projeto
 ├── FEEDBACK.md - Arquivo para Consolidação dos Feedbacks
