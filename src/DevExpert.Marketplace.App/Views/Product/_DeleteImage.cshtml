@@ -1,0 +1,58 @@
+<div class="modal fade" id="deleteImageModal" tabindex="-1" aria-labelledby="deleteImageLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+            <div class="modal-body text-center">
+                <div class="p-4 mb-3"
+                     style="background-color: #FFE8E8;
+                            border-radius: 50%;
+                            width: 80px;
+                            height: 80px;
+                            margin: 0 auto;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                    <i class="bi bi-trash" style="font-size: 2.5rem; color: #E74C3C;"></i>
+                </div>
+
+                <h5 class="fw-bold">Tem certeza que deseja excluir esta imagem?</h5>
+                <p class="text-muted">Esta imagem será excluída permanentemente.</p>
+
+                <div class="d-flex justify-content-around mt-4">
+                    <button type="button"
+                            class="btn btn-outline-secondary px-4 py-2 rounded-3"
+                            data-bs-dismiss="modal">Cancelar</button>
+
+                    <form id="deleteImageForm" method="post">
+                        <button type="submit"
+                                class="btn btn-danger px-4 py-2 rounded-3">Sim, Excluir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteImageModal = document.getElementById('deleteImageModal');
+        deleteImageModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const imageId = button.getAttribute('data-image-id');
+
+            const form = document.getElementById('deleteImageForm');
+            form.setAttribute('action', `/produto/excluir-imagem/${imageId}`);
+            form.setAttribute('method', 'post');
+
+            // Remove entradas antigas
+            [...form.querySelectorAll('input[name=\"_method\"]')].forEach(i => i.remove());
+
+            // Simular DELETE
+            const methodInput = document.createElement('input');
+            methodInput.setAttribute('type', 'hidden');
+            methodInput.setAttribute('name', '_method');
+            methodInput.setAttribute('value', 'DELETE');
+
+            form.appendChild(methodInput);
+        });
+    });
+</script>

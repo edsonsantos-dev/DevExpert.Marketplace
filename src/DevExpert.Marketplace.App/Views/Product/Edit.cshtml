@@ -29,12 +29,12 @@
 
                 <div class="mb-3">
                     <label class="form-label">Preço</label>
-                    <input name="Price" class="form-control" value="@Model.Price"/>
+                    <input name="Price" class="form-control" value="@Model.Price" type="number" step="0.01"/>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Estoque</label>
-                    <input name="Stock" class="form-control" value="@Model.Stock"/>
+                    <input name="Stock" class="form-control" value="@Model.Stock" type="number" step="1"/>
                 </div>
 
                 <div class="mb-3">
@@ -64,7 +64,15 @@
                                 <div class="col-4 mb-3">
                                     <img src="~/@image.FilePath" class="img-fluid border rounded" alt="Imagem do Produto">
                                     <div class="mt-2 text-center">
-                                        <button type="button" class="btn btn-danger btn-sm remove-image-btn" data-image-id="@image.Id">Excluir</button>
+                                        <button type="button"
+                                                class="btn-icon-trash"
+                                                title="Excluir"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteImageModal"
+                                                data-image-id="@image.Id">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+
                                     </div>
                                 </div>
                             }
@@ -84,3 +92,5 @@
         </div>
     </div>
 </div>
+
+<partial name="_DeleteImage"/>
