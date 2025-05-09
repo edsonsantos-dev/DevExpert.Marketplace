@@ -30,12 +30,20 @@ public class ImageService(
             return;
         }
         
+        var images = await repository.GetImagesByProductIdAsync(image.ProductId.GetValueOrDefault());
+
+        if (images.Count == 1)
+        {
+            notifier.AddNotification(new Notification("Primeiro, insira uma nova imagem."));
+            return;
+        }
+        
         await repository.DeleteAsync(image);
         await repository.SaveChangesAsync();
         
         DeleteImage(image.ProductId.GetValueOrDefault(), image.Name);;
         
-        var images = await repository.GetImagesByProductIdAsync(image.ProductId.GetValueOrDefault());
+        images.Remove(image);
         await ReorderProductImagesDisplayPositionAsync(images);
     }
     

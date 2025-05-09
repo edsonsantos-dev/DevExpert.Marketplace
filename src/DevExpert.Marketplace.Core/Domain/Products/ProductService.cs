@@ -5,7 +5,7 @@ using DevExpert.Marketplace.Core.Notifications;
 namespace DevExpert.Marketplace.Core.Domain.Products;
 
 public class ProductService(
-    ImageService imageService,
+    IImageService imageService,
     IProductRepository repository,
     IImageRepository imageRepository,
     IUserContext userContext,
