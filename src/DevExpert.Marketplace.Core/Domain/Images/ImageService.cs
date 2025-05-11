@@ -103,11 +103,13 @@ public class ImageService(
                 id.ToString(),
                 name);
         }
-
-        path = Path.Combine(
-            Settings.ProductImageDirectoryPath,
-            id.ToString(),
-            name);
+        else
+        {
+            path = Path.Combine(
+                Settings.ProductImageDirectoryPath,
+                id.ToString(),
+                name);
+        }
 
         return NormalizePathSeparators(path);
     }
@@ -160,11 +162,13 @@ public class ImageService(
                 Settings.ProductImageDirectoryPath,
                 id.ToString());
         }
-
-        path = Path.Combine(
-            Settings.RootPath,
-            Settings.ProductImageDirectoryPath,
-            id.ToString());
+        else
+        {
+            path = Path.Combine(
+                Settings.RootPath,
+                Settings.ProductImageDirectoryPath,
+                id.ToString());
+        }
 
         return NormalizePathSeparators(path);
     }
