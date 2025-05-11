@@ -52,7 +52,7 @@ public class ImageService(
     public async Task ReorderProductImagesDisplayPositionAsync(List<Image> images)
     {
         var count = 1;
-        foreach (var image in images.OrderBy(x => x.DisplayPosition))
+        foreach (var image in images.OrderBy(x => x.AddedOn))
         {
             image.DisplayPosition = count++;
             await repository.UpdateAsync(image);

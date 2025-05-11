@@ -7,6 +7,16 @@ namespace DevExpert.Marketplace.Core.Data.Repositories;
 public class ProductRepository(MarketplaceContext context)
     : Repository<Product>(context), IProductRepository
 {
+    public override async Task<Product> UpdateAsync(Product entity)
+    {
+        entity = await base.UpdateAsync(entity);
+        
+        foreach (var image in entity.Images.Where(x => x.AddedOn == DateTime.MinValue))
+            context.Entry(image).State = EntityState.Added;
+        
+        return entity;
+    }
+
     public async Task<bool> ProductHasImageAsync(Guid id)
     {
         return await DbSet
