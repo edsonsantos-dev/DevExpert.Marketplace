@@ -6,6 +6,7 @@ using DevExpert.Marketplace.Core.Domain.Images;
 using DevExpert.Marketplace.Core.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -97,8 +98,17 @@ void ConfigureServices(WebApplicationBuilder builder)
 
 void ConfigureMiddleware(WebApplication app)
 {
-    app.UseStaticFiles();
-
+    var staticFileOptions = new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(
+                Directory.GetCurrentDirectory(),
+                Settings.Instance!.AppPath,
+                Settings.Instance.RootPath)),
+        RequestPath = "/DevExpert.Marketplace.App/wwwroot"
+    };
+    app.UseStaticFiles(staticFileOptions);
+    
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
